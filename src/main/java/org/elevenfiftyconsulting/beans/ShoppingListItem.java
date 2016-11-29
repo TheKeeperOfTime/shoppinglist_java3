@@ -11,32 +11,33 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "items")
 public class ShoppingListItem {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private int Shopping_List_Id;
-	
-	private String Contents;
-	private int Priority;
+	private int shoppingListId;
+
+	private String contents;
+	private int priority;
 	private boolean isChecked;
-	private OffsetDateTime CreatedUtc;
-	private OffsetDateTime  ModifiedUtc;
-	
-	public ShoppingListItem(String Contents, int Priority, boolean isChecked, OffsetDateTime CreatedUtc, OffsetDateTime ModifiedUtc){
-		this.Contents = Contents;
-		this.Priority = Priority;
+	private OffsetDateTime createdUtc;
+	private OffsetDateTime modifiedUtc;
+
+	public ShoppingListItem(String Contents, int Priority, boolean isChecked, OffsetDateTime CreatedUtc,
+			OffsetDateTime ModifiedUtc) {
+		this.contents = Contents;
+		this.priority = Priority;
 		this.isChecked = isChecked;
-		this.CreatedUtc = CreatedUtc;
-		this.ModifiedUtc = ModifiedUtc;
+		this.createdUtc = CreatedUtc;
+		this.modifiedUtc = ModifiedUtc;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "ShoppingListItem [id=" + id + ", Shopping_List_Id=" + Shopping_List_Id + ", "
-				+ (Contents != null ? "Contents=" + Contents + ", " : "") + "Priority=" + Priority + ", isChecked="
-				+ isChecked + ", " + (CreatedUtc != null ? "CreatedUtc=" + CreatedUtc + ", " : "")
-				+ (ModifiedUtc != null ? "ModifiedUtc=" + ModifiedUtc : "") + "]";
+		return "ShoppingListItem [id=" + id + ", Shopping_List_Id=" + shoppingListId + ", "
+				+ (contents != null ? "Contents=" + contents + ", " : "") + "Priority=" + priority + ", isChecked="
+				+ isChecked + ", " + (createdUtc != null ? "CreatedUtc=" + createdUtc + ", " : "")
+				+ (modifiedUtc != null ? "ModifiedUtc=" + modifiedUtc : "") + "]";
 	}
 
 	public int getId() {
@@ -47,28 +48,28 @@ public class ShoppingListItem {
 		this.id = id;
 	}
 
-	public int getShopping_List_Id() {
-		return Shopping_List_Id;
+	public int getShoppingListId() {
+		return shoppingListId;
 	}
 
-	public void setShopping_List_Id(int shopping_List_Id) {
-		Shopping_List_Id = shopping_List_Id;
+	public void setShoppingListId(int shoppingListId) {
+		shoppingListId = shoppingListId;
 	}
 
 	public String getContents() {
-		return Contents;
+		return contents;
 	}
 
 	public void setContents(String contents) {
-		Contents = contents;
+		contents = contents;
 	}
 
 	public int getPriority() {
-		return Priority;
+		return priority;
 	}
 
 	public void setPriority(int priority) {
-		Priority = priority;
+		priority = priority;
 	}
 
 	public boolean isChecked() {
@@ -80,20 +81,19 @@ public class ShoppingListItem {
 	}
 
 	public OffsetDateTime getCreatedUtc() {
-		return CreatedUtc;
+		return createdUtc;
 	}
 
 	public void setCreatedUtc(OffsetDateTime createdUtc) {
-		CreatedUtc = createdUtc;
+		createdUtc = createdUtc;
 	}
 
 	public OffsetDateTime getModifiedUtc() {
-		return ModifiedUtc;
+		return modifiedUtc;
 	}
 
 	public void setModifiedUtc(OffsetDateTime modifiedUtc) {
-		ModifiedUtc = modifiedUtc;
+		modifiedUtc = modifiedUtc;
 	}
-		
 
 }
