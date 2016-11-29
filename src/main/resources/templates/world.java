@@ -1,4 +1,4 @@
-package org.elevenfifty.main;
+package templates;
 
 public class world {
 

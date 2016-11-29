@@ -1,4 +1,4 @@
-package main;
+package org.elevenfiftyconsulting;
 
 public class hello {
 
