@@ -13,17 +13,17 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
+
 	private String firstName;
 	private String lastName;
-	
+
 	private boolean active;
-	
-	public User(){
+
+	public User() {
 		active = true;
 	}
-	
-	public User(String firstName, String lastName, boolean active){
+
+	public User(String firstName, String lastName, boolean active) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.active = active;
@@ -66,6 +66,5 @@ public class User {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	
+
 }
