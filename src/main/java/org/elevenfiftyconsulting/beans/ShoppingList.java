@@ -1,21 +1,20 @@
 package org.elevenfiftyconsulting.beans;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
-
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+//import javax.persistence.GenerationType;
+import javax.persistence.Table;
 
 @Entity
-@Table(name = "Shopping_List")
+@Table(name = "shopping_list")
 public class ShoppingList {
 
 	@Id
@@ -32,10 +31,14 @@ public class ShoppingList {
 
 	private OffsetDateTime createdUtc;
 	private OffsetDateTime modifiedUtc;
-	
-	public ShoppingList(){}
-	
-	public ShoppingList(String name, OffsetDateTime createdUtc, OffsetDateTime modifiedUtc){
+
+	@OneToMany(mappedBy = "shoppingList")
+	private List<ShoppingListItem> shoppingListItems;
+
+	public ShoppingList() {
+	}
+
+	public ShoppingList(String name, OffsetDateTime createdUtc, OffsetDateTime modifiedUtc) {
 		this.name = name;
 		this.createdUtc = createdUtc;
 		this.modifiedUtc = modifiedUtc;

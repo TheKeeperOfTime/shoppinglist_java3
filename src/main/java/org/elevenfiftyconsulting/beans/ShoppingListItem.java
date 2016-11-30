@@ -7,11 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
+//import org.hibernate.annotations.GenericGenerator;
+//import org.hibernate.annotations.Parameter;
 
 @Entity
 @Table(name = "items")
@@ -21,7 +21,7 @@ public class ShoppingListItem {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@OneToOne(optional = false)
+	@ManyToOne
 	@JoinColumn(name = "shopping_list_id")
 	private ShoppingList shoppingList;
 

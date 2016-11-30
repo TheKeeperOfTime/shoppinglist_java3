@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS heroku_cc1579a21c316f1.users (
 
 CREATE TABLE IF NOT EXISTS heroku_cc1579a21c316f1.shopping_list(
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  user_id INT UNSIGNED NOT NULL,
+  user_id INT NOT NULL,
   name VARCHAR(45) NOT NULL,
   color VARCHAR(45) NOT NULL,
   created_utc TIMESTAMP NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS heroku_cc1579a21c316f1.shopping_list(
   
 CREATE TABLE IF NOT EXISTS heroku_cc1579a21c316f1.shopping_list_item (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  shopping_list_id INT UNSIGNED NOT NULL,
+  shopping_list_id INT NOT NULL,
   contents VARCHAR(100) NOT NULL,
   priority INT UNSIGNED NOT NULL,
   is_checked tinyint(1) NOT NULL DEFAULT 1,
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS heroku_cc1579a21c316f1.shopping_list_item (
   
 CREATE TABLE IF NOT EXISTS heroku_cc1579a21c316f1.notes (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  shopping_list_item_id INT UNSIGNED NOT NULL,
+  shopping_list_item_id INT NOT NULL,
   body VARCHAR(250) NOT NULL,
   created_utc TIMESTAMP NOT NULL,
   modified_utc TIMESTAMP NOT NULL,
