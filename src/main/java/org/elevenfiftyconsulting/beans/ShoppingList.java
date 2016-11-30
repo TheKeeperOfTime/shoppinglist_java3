@@ -32,6 +32,14 @@ public class ShoppingList {
 
 	private OffsetDateTime createdUtc;
 	private OffsetDateTime modifiedUtc;
+	
+	public ShoppingList(){}
+	
+	public ShoppingList(String name, OffsetDateTime createdUtc, OffsetDateTime modifiedUtc){
+		this.name = name;
+		this.createdUtc = createdUtc;
+		this.modifiedUtc = modifiedUtc;
+	}
 
 	public int getId() {
 		return id;
