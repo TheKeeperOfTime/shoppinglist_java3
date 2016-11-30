@@ -30,6 +30,8 @@ public class ShoppingListItem {
 	private boolean isChecked;
 	private OffsetDateTime createdUtc;
 	private OffsetDateTime modifiedUtc;
+	
+	public ShoppingListItem(){}
 
 	public ShoppingListItem(String Contents, int Priority, boolean isChecked, OffsetDateTime CreatedUtc,
 			OffsetDateTime ModifiedUtc) {
