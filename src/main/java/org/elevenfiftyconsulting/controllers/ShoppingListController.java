@@ -35,7 +35,7 @@ public class ShoppingListController {
 
 	@RequestMapping("/")
 	public String index(Model model) {
-		return "index";
+		return "shoppingList";
 	}
 	
 	@RequestMapping("/home")
@@ -43,13 +43,13 @@ public class ShoppingListController {
 		return "index";
 	}
 	
-	@GetMapping("/shoppingList/create")
+	@GetMapping("/shoppinglist/create")
 	public String shoppingListCreate(Model model) {
 		model.addAttribute(new ShoppingList());
 		return "shoppingList/shoppingListCreate";
 	}
 	
-	@PostMapping("/shoppingList/create")
+	@PostMapping("/shoppinglist/create")
 	public String shoppingListCreate(@ModelAttribute @Valid ShoppingList shoppingList, BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
@@ -62,21 +62,21 @@ public class ShoppingListController {
 
 	}
 
-	@RequestMapping("shoppingList/{shoppingListId}")
+	@RequestMapping("shoppinglist/{shoppingListId}")
 	public String listShoppingListItems(@PathVariable(name="shoppingListId") int shoppingListId, Model model) {
 		model.addAttribute("shoppingListItems", shoppingListRepo.findOne(shoppingListId));
 		return "shoppingListItems";
 	}
 	
 	//create view shoppingListItem
-	@GetMapping("/shoppingListItem/create")
+	@GetMapping("/shoppinglistitem/create")
 	public String shoppingListItemCreate(Model model) {
 		model.addAttribute(new ShoppingListItem());
 		return "shoppingListItem/shoppingListItemCreate";
 	}
 	
 	//save created shoppingListItem
-	@PostMapping("/shoppingListItem/create")
+	@PostMapping("/shoppinglistitem/create")
 	public String shoppingListItemCreate(@ModelAttribute @Valid ShoppingListItem shoppingListItem, BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
