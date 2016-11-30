@@ -2,6 +2,7 @@ package org.elevenfiftyconsulting.controllers;
 
 import javax.validation.Valid;
 
+import org.elevenfiftyconsulting.beans.ShoppingList;
 import org.elevenfiftyconsulting.beans.ShoppingListItem;
 //import org.elevenfiftyconsulting.repositories.NoteRepository;
 import org.elevenfiftyconsulting.repositories.ShoppingListItemRepository;
@@ -35,6 +36,25 @@ public class ShoppingListController {
 	@RequestMapping("/")
 	public String home(Model model) {
 		return "shoppingList";
+	}
+	
+	@GetMapping("/shoppingList/create")
+	public String shoppingListCreate(Model model) {
+		model.addAttribute(new ShoppingList());
+		return "shoppingList/shoppingListCreate";
+	}
+	
+	@PostMapping("/shoppingList/create")
+	public String shoppingListCreate(@ModelAttribute @Valid ShoppingList shoppingList, BindingResult result, Model model) {
+
+		if (result.hasErrors()) {
+			model.addAttribute("shoppingList", shoppingList);
+			return "shoppingList/shoppingListCreate";
+		} else {
+			shoppingListRepo.save(shoppingList);
+			return "redirect:/shoppingList";
+		}
+
 	}
 
 	@RequestMapping("shoppingList/{shoppingListId}")

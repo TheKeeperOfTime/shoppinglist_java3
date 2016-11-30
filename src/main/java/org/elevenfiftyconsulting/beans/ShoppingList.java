@@ -18,7 +18,7 @@ import javax.persistence.Table;
 public class ShoppingList {
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
 	@OneToOne(optional = false)
@@ -31,9 +31,18 @@ public class ShoppingList {
 
 	private OffsetDateTime createdUtc;
 	private OffsetDateTime modifiedUtc;
-	
-	@OneToMany(mappedBy="shoppingList")
-	private List <ShoppingListItem> shoppingListItems;
+
+	@OneToMany(mappedBy = "shoppingList")
+	private List<ShoppingListItem> shoppingListItems;
+
+	public ShoppingList() {
+	}
+
+	public ShoppingList(String name, OffsetDateTime createdUtc, OffsetDateTime modifiedUtc) {
+		this.name = name;
+		this.createdUtc = createdUtc;
+		this.modifiedUtc = modifiedUtc;
+	}
 
 	public int getId() {
 		return id;
