@@ -1,14 +1,13 @@
-CREATE SCHEMA IF NOT EXISTS shoppinglist_java3;
-USE shoppinglist_java3;
+USE heroku_cc1579a21c316f1;
 
-CREATE TABLE IF NOT EXISTS shoppinglist_java3.users (
+CREATE TABLE IF NOT EXISTS heroku_cc1579a21c316f1.users (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   first_name VARCHAR(45) NOT NULL,
   last_name VARCHAR(45) NOT NULL,
   active tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (id));
 
-CREATE TABLE IF NOT EXISTS shoppinglist_java3.shopping_list(
+CREATE TABLE IF NOT EXISTS heroku_cc1579a21c316f1.shopping_list(
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   user_id INT UNSIGNED NOT NULL,
   name VARCHAR(45) NOT NULL,
@@ -17,7 +16,7 @@ CREATE TABLE IF NOT EXISTS shoppinglist_java3.shopping_list(
   modified_utc TIMESTAMP NOT NULL,
   PRIMARY KEY (id));
   
-CREATE TABLE IF NOT EXISTS shoppinglist_java3.shopping_list_item (
+CREATE TABLE IF NOT EXISTS heroku_cc1579a21c316f1.shopping_list_item (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   shopping_list_id INT UNSIGNED NOT NULL,
   contents VARCHAR(100) NOT NULL,
@@ -27,7 +26,7 @@ CREATE TABLE IF NOT EXISTS shoppinglist_java3.shopping_list_item (
   modified_utc TIMESTAMP NOT NULL,
   PRIMARY KEY (id));
   
-CREATE TABLE IF NOT EXISTS shoppinglist_java3.notes (
+CREATE TABLE IF NOT EXISTS heroku_cc1579a21c316f1.notes (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   shopping_list_item_id INT UNSIGNED NOT NULL,
   body VARCHAR(250) NOT NULL,
