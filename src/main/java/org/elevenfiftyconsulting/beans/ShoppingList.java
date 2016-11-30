@@ -6,6 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -20,7 +24,7 @@ public class ShoppingList {
 
 	@OneToOne(optional = false)
 	@JoinColumn(name = "user_id")
-	private User userId;
+	private User user;
 
 	private String color;
 
@@ -37,12 +41,12 @@ public class ShoppingList {
 		this.id = id;
 	}
 
-	public User getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(User userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getColor() {

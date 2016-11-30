@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS shoppinglist_java3.shopping_list(
 CREATE TABLE IF NOT EXISTS shoppinglist_java3.shopping_list_item (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   shopping_list_id INT UNSIGNED NOT NULL,
-  contents STRING NOT NULL,
+  contents VARCHAR(100) NOT NULL,
   priority INT UNSIGNED NOT NULL,
   is_checked tinyint(1) NOT NULL DEFAULT 1,
   created_utc TIMESTAMP NOT NULL,
@@ -29,8 +29,8 @@ CREATE TABLE IF NOT EXISTS shoppinglist_java3.shopping_list_item (
   
 CREATE TABLE IF NOT EXISTS shoppinglist_java3.notes (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  shopping_list_item_id UNSIGNED NOT NULL,
-  body String VARCHAR(250) NOT NULL,
+  shopping_list_item_id INT UNSIGNED NOT NULL,
+  body VARCHAR(250) NOT NULL,
   created_utc TIMESTAMP NOT NULL,
   modified_utc TIMESTAMP NOT NULL,
   PRIMARY KEY (id));
