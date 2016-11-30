@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS heroku_cc1579a21c316f1.users (
   active tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (id));
 
-CREATE TABLE IF NOT EXISTS heroku_cc1579a21c316f1.shopping_list(
+CREATE TABLE IF NOT EXISTS heroku_cc1579a21c316f1.shopping_lists(
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   user_id INT NOT NULL,
   name VARCHAR(45) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS heroku_cc1579a21c316f1.shopping_list(
   modified_utc TIMESTAMP NOT NULL,
   PRIMARY KEY (id));
   
-CREATE TABLE IF NOT EXISTS heroku_cc1579a21c316f1.shopping_list_item (
+CREATE TABLE IF NOT EXISTS heroku_cc1579a21c316f1.shopping_list_items (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   shopping_list_id INT NOT NULL,
   contents VARCHAR(100) NOT NULL,
