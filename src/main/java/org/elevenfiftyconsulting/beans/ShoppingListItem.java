@@ -6,7 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 @Entity
 @Table(name = "items")
@@ -15,7 +20,10 @@ public class ShoppingListItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private int shoppingListId;
+	
+	@OneToOne(optional = false)
+	@JoinColumn(name = "shopping_list_id")
+	private ShoppingList shoppingList;
 
 	private String contents;
 	private int priority;
@@ -32,13 +40,14 @@ public class ShoppingListItem {
 		this.modifiedUtc = ModifiedUtc;
 	}
 
+	
 	@Override
 	public String toString() {
-		return "ShoppingListItem [id=" + id + ", Shopping_List_Id=" + shoppingListId + ", "
-				+ (contents != null ? "Contents=" + contents + ", " : "") + "Priority=" + priority + ", isChecked="
-				+ isChecked + ", " + (createdUtc != null ? "CreatedUtc=" + createdUtc + ", " : "")
-				+ (modifiedUtc != null ? "ModifiedUtc=" + modifiedUtc : "") + "]";
+		return "ShoppingListItem [id=" + id + ", shoppingList=" + shoppingList + ", contents=" + contents
+				+ ", priority=" + priority + ", isChecked=" + isChecked + ", createdUtc=" + createdUtc
+				+ ", modifiedUtc=" + modifiedUtc + "]";
 	}
+
 
 	public int getId() {
 		return id;
@@ -48,13 +57,17 @@ public class ShoppingListItem {
 		this.id = id;
 	}
 
-	public int getShoppingListId() {
-		return shoppingListId;
+	
+
+	public ShoppingList getShoppingList() {
+		return shoppingList;
 	}
 
-	public void setShoppingListId(int shoppingListId) {
-		shoppingListId = shoppingListId;
+
+	public void setShoppingList(ShoppingList shoppingList) {
+		this.shoppingList = shoppingList;
 	}
+
 
 	public String getContents() {
 		return contents;
