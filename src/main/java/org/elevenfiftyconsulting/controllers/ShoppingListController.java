@@ -34,8 +34,13 @@ public class ShoppingListController {
 //	private UserRepository userRepo;
 
 	@RequestMapping("/")
+	public String index(Model model) {
+		return "index";
+	}
+	
+	@RequestMapping("/home")
 	public String home(Model model) {
-		return "shoppingList";
+		return "index";
 	}
 	
 	@GetMapping("/shoppingList/create")
