@@ -51,7 +51,7 @@ public class ShoppingListController {
 	@GetMapping("/shoppinglist/create")
 	public String shoppingListCreate(Model model) {
 		model.addAttribute(new ShoppingList());
-		return "shoppingList/shoppingListCreate";
+		return "shoppingListItem/shoppingListCreate";
 	}
 	
 	@PostMapping("/shoppinglist/create")
@@ -59,10 +59,10 @@ public class ShoppingListController {
 
 		if (result.hasErrors()) {
 			model.addAttribute("shoppingList", shoppingList);
-			return "shoppingList/shoppingListCreate";
+			return "shoppingListItem/shoppingListCreate";
 		} else {
 			shoppingListRepo.save(shoppingList);
-			return "redirect:/shoppingList";
+			return "redirect:/shoppinglists";
 		}
 
 	}
