@@ -105,13 +105,13 @@ public class ShoppingListController {
 	@PostMapping("/shoppinglistitem/create")
 	public String shoppingListItemCreate(@ModelAttribute @Valid ShoppingListItem shoppingListItem, BindingResult result, Model model) {
 
-		if (result.hasErrors()) {
-			model.addAttribute("shoppingListItem", shoppingListItem);
-			return "shoppingListItem/shoppingListItemCreate";
-		} else {
-			shoppingListItemRepo.save(shoppingListItem);
-			return "redirect:/shoppingListItems";
-		}
+		
+		
+		
+		shoppingListItem.setCreatedUtc(new Date(System.currentTimeMillis()));
+		shoppingListItem.setModifiedUtc(new Date(System.currentTimeMillis()));
+		shoppingListItemRepo.save(shoppingListItem);
+		return "redirect:/shoppinglist/{id}";
 
 	}
 
