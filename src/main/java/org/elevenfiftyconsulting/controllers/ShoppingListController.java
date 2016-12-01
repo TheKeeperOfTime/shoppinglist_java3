@@ -89,7 +89,7 @@ public class ShoppingListController {
 	}
 
 	@RequestMapping("shoppinglist/{shoppingListId}")
-	public String listShoppingListItems(@PathVariable(name="shoppingListId") int shoppingListId, Model model) {
+	public String listShoppingListItems(@PathVariable int shoppingListId, Model model) {
 		model.addAttribute("shoppingListItems", shoppingListRepo.findOne(shoppingListId));
 		return "shoppingListItems";
 	}
