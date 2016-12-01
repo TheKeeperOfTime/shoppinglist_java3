@@ -65,7 +65,7 @@ public class ShoppingListController {
 	}
 	
 	@PostMapping("/shoppinglist/create")
-	public String shoppingListCreate(@ModelAttribute ShoppingList shoppingList, Model model) {
+	public String shoppingListCreate(@ModelAttribute ShoppingList shoppingList, BindingResult result, Model model) {
 
 //		if (result.hasErrors()) {
 //			model.addAttribute("shoppingList", shoppingList);
@@ -88,9 +88,12 @@ public class ShoppingListController {
 
 	}
 
-	@RequestMapping("shoppinglist/{shoppingListId}")
-	public String listShoppingListItems(@PathVariable int shoppingListId, Model model) {
-		model.addAttribute("shoppingListItems", shoppingListRepo.findOne(shoppingListId));
+	@RequestMapping("/shoppinglist/{id}")
+	public String listShoppingListItems(@PathVariable int id, Model model) {
+		model.addAttribute("id", id);
+		
+		ShoppingListItem i = shoppingListItemRepo.findOne(id);
+		model.addAttribute("shoppingListItems", i);
 		return "shoppingListItem/shoppingListItems";
 	}
 	

@@ -4,11 +4,14 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+//import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 //import org.hibernate.annotations.GenericGenerator;
 //import org.hibernate.annotations.Parameter;
@@ -18,7 +21,8 @@ import javax.persistence.Table;
 public class ShoppingListItem {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(generator="myGenerator")
+	@GenericGenerator(name="myGenerator", strategy="foreign", parameters=@Parameter (value="user", name = "property"))
 	private int id;
 	
 	@ManyToOne
