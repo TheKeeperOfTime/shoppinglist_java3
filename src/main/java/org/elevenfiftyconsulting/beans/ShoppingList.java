@@ -1,6 +1,7 @@
-package org.elevenfiftyconsulting.beans;
+ package org.elevenfiftyconsulting.beans;
 
-import java.time.OffsetDateTime;
+
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -8,8 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+//import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+//import javax.persistence.OneToOne;
 //import javax.persistence.GenerationType;
 import javax.persistence.Table;
 
@@ -29,8 +32,8 @@ public class ShoppingList {
 
 	private String name;
 
-	private OffsetDateTime createdUtc;
-	private OffsetDateTime modifiedUtc;
+	private Date createdUtc;
+	private Date modifiedUtc;
 
 	@OneToMany(mappedBy = "shoppingList")
 	private List<ShoppingListItem> shoppingListItems;
@@ -38,7 +41,7 @@ public class ShoppingList {
 	public ShoppingList() {
 	}
 
-	public ShoppingList(String name, OffsetDateTime createdUtc, OffsetDateTime modifiedUtc) {
+	public ShoppingList(String name, Date createdUtc, Date modifiedUtc) {
 		this.name = name;
 		this.createdUtc = createdUtc;
 		this.modifiedUtc = modifiedUtc;
@@ -55,7 +58,7 @@ public class ShoppingList {
 	public User getUser() {
 		return user;
 	}
-
+	
 	public void setUser(User user) {
 		this.user = user;
 	}
@@ -76,19 +79,19 @@ public class ShoppingList {
 		this.name = name;
 	}
 
-	public OffsetDateTime getCreatedUtc() {
+	public Date getCreatedUtc() {
 		return createdUtc;
 	}
 
-	public void setCreatedUtc(OffsetDateTime createdUtc) {
+	public void setCreatedUtc(Date createdUtc) {
 		this.createdUtc = createdUtc;
 	}
 
-	public OffsetDateTime getModifiedUtc() {
+	public Date getModifiedUtc() {
 		return modifiedUtc;
 	}
 
-	public void setModifiedUtc(OffsetDateTime modifiedUtc) {
+	public void setModifiedUtc(Date modifiedUtc) {
 		this.modifiedUtc = modifiedUtc;
 	}
 
