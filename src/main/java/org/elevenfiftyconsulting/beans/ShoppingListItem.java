@@ -14,7 +14,7 @@ import javax.persistence.Table;
 //import org.hibernate.annotations.Parameter;
 
 @Entity
-@Table(name = "items")
+@Table(name = "shopping_list_items")
 public class ShoppingListItem {
 
 	@Id
