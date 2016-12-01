@@ -1,4 +1,6 @@
 package org.elevenfiftyconsulting.controllers;
+//
+//import static com.users.security.Role.ROLE_USER;
 
 import javax.validation.Valid;
 
@@ -17,6 +19,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+//import com.users.beans.User;
+//import com.users.beans.UserRole;
 
 @Controller
 public class ShoppingListController {
@@ -47,7 +55,7 @@ public class ShoppingListController {
 	public String shoppingLists(Model model) {
 		return "shoppingListItem/shoppingList";
 	}
-	
+
 	@GetMapping("/shoppinglist/create")
 	public String shoppingListCreate(Model model) {
 		model.addAttribute(new ShoppingList());
@@ -55,7 +63,7 @@ public class ShoppingListController {
 	}
 	
 	@PostMapping("/shoppinglist/create")
-	public String shoppingListCreate(@ModelAttribute @Valid ShoppingList shoppingList, Model model) {
+	public String shoppingListCreate(@ModelAttribute ShoppingList shoppingList, Model model) {
 
 //		if (result.hasErrors()) {
 //			model.addAttribute("shoppingList", shoppingList);
@@ -66,7 +74,7 @@ public class ShoppingListController {
 //		}
 		
 		shoppingListRepo.save(shoppingList);
-		return "redirect:/shoppinglists/";
+		return "redirect:/";
 
 	}
 
