@@ -91,7 +91,7 @@ public class ShoppingListController {
 	@RequestMapping("shoppinglist/{shoppingListId}")
 	public String listShoppingListItems(@PathVariable int shoppingListId, Model model) {
 		model.addAttribute("shoppingListItems", shoppingListRepo.findOne(shoppingListId));
-		return "shoppingListItems";
+		return "shoppingListItem/shoppingListItems";
 	}
 	
 	//create view shoppingListItem
@@ -111,7 +111,7 @@ public class ShoppingListController {
 		shoppingListItem.setCreatedUtc(new Date(System.currentTimeMillis()));
 		shoppingListItem.setModifiedUtc(new Date(System.currentTimeMillis()));
 		shoppingListItemRepo.save(shoppingListItem);
-		return "redirect:/shoppinglist/{id}";
+		return "redirect:/shoppinglist/{shoppingListId}";
 
 	}
 
