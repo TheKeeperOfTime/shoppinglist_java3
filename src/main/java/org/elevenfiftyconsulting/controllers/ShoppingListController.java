@@ -43,9 +43,9 @@ public class ShoppingListController {
 		return "index";
 	}
 	
-	@RequestMapping("shoppinglists")
+	@RequestMapping("/shoppinglists")
 	public String shoppingLists(Model model) {
-		return "shoppingList";
+		return "shoppingListItem/shoppingList";
 	}
 	
 	@GetMapping("/shoppinglist/create")
