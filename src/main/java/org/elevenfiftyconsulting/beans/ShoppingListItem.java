@@ -1,6 +1,6 @@
 package org.elevenfiftyconsulting.beans;
 
-import java.time.OffsetDateTime;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,13 +28,13 @@ public class ShoppingListItem {
 	private String contents;
 	private int priority;
 	private boolean isChecked;
-	private OffsetDateTime createdUtc;
-	private OffsetDateTime modifiedUtc;
+	private Date createdUtc;
+	private Date modifiedUtc;
 	
 	public ShoppingListItem(){}
 
-	public ShoppingListItem(String Contents, int Priority, boolean isChecked, OffsetDateTime CreatedUtc,
-			OffsetDateTime ModifiedUtc) {
+	public ShoppingListItem(String Contents, int Priority, boolean isChecked, Date CreatedUtc,
+			Date ModifiedUtc) {
 		this.contents = Contents;
 		this.priority = Priority;
 		this.isChecked = isChecked;
@@ -74,7 +74,7 @@ public class ShoppingListItem {
 	}
 
 	public void setContents(String contents) {
-		contents = contents;
+		this.contents = contents;
 	}
 
 	public int getPriority() {
@@ -82,7 +82,7 @@ public class ShoppingListItem {
 	}
 
 	public void setPriority(int priority) {
-		priority = priority;
+		this.priority = priority;
 	}
 
 	public boolean isChecked() {
@@ -93,20 +93,22 @@ public class ShoppingListItem {
 		this.isChecked = isChecked;
 	}
 
-	public OffsetDateTime getCreatedUtc() {
+	public Date getCreatedUtc() {
 		return createdUtc;
 	}
 
-	public void setCreatedUtc(OffsetDateTime createdUtc) {
-		createdUtc = createdUtc;
+	public void setCreatedUtc(Date createdUtc) {
+		this.createdUtc = createdUtc;
 	}
 
-	public OffsetDateTime getModifiedUtc() {
+	public Date getModifiedUtc() {
 		return modifiedUtc;
 	}
 
-	public void setModifiedUtc(OffsetDateTime modifiedUtc) {
-		modifiedUtc = modifiedUtc;
+	public void setModifiedUtc(Date modifiedUtc) {
+		this.modifiedUtc = modifiedUtc;
 	}
+
+	
 
 }
