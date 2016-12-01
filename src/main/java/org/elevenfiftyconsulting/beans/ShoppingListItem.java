@@ -59,8 +59,6 @@ public class ShoppingListItem {
 		this.id = id;
 	}
 
-	
-
 	public ShoppingList getShoppingList() {
 		return shoppingList;
 	}
