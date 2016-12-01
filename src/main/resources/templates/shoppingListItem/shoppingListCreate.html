@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layouts/basic">
 <head>
-<title>Add<button onclick="goBack()">Back to List</button></title>
+<title></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body layout:fragment="content">
 	<h1>Shopping List</h1>
-	<form th:action="@{|/shoppingList/create|}" enctype="multipart/form-data"
+	<form th:action="${shoppingList}" enctype="multipart/form-data"
 		method="POST">
 
 		<div class="field">
@@ -14,10 +14,10 @@
 				type="text" th:value="${shoppingList.name}" />
 		</div>
 
-		<div class="field">
+		<!-- <div class="field">
 			<label for="color">Color</label> <input name="color"
 				type="text" th:value="${shoppingList.color}" />
-		</div>
+		</div> -->
 
 		<button type="submit" class="btn btn-default">Save</button>
 	</form>
