@@ -35,12 +35,17 @@ public class ShoppingListController {
 
 	@RequestMapping("/")
 	public String index(Model model) {
-		return "shoppingList";
+		return "redirect:/shoppinglists";
 	}
 	
 	@RequestMapping("/home")
 	public String home(Model model) {
 		return "index";
+	}
+	
+	@RequestMapping("shoppinglists")
+	public String shoppingLists(Model model) {
+		return "shoppingList";
 	}
 	
 	@GetMapping("/shoppinglist/create")
