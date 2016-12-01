@@ -16,12 +16,16 @@ import javax.persistence.OneToOne;
 //import javax.persistence.GenerationType;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 @Entity
 @Table(name = "shopping_list")
 public class ShoppingList {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(generator="myGenerator")
+	@GenericGenerator(name="myGenerator", strategy="foreign", parameters=@Parameter (value="user", name = "property"))
 	private int id;
 
 	@OneToOne(optional = false)

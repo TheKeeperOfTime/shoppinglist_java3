@@ -12,9 +12,8 @@
 
 		<h1>Add Item</h1>
 
-		<form method="POST" th:object="${shoppingListItem}"
-			enctype="multipart/form-data">
-			<input type="hidden" th:field="*{id}" />
+		<form method="POST" th:object="${shoppingListItem}">
+		<input type="hidden" name="id" th:value="*{id}" />
 
 			<div class="form-group">
 				<label for="">Contents</label> <input type="text" name="contents"
