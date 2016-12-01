@@ -2,13 +2,17 @@ package org.elevenfiftyconsulting.controllers;
 //
 //import static com.users.security.Role.ROLE_USER;
 
+import java.util.Date;
+
 import javax.validation.Valid;
 
 import org.elevenfiftyconsulting.beans.ShoppingList;
 import org.elevenfiftyconsulting.beans.ShoppingListItem;
+import org.elevenfiftyconsulting.beans.User;
 //import org.elevenfiftyconsulting.repositories.NoteRepository;
 import org.elevenfiftyconsulting.repositories.ShoppingListItemRepository;
 import org.elevenfiftyconsulting.repositories.ShoppingListRepository;
+import org.elevenfiftyconsulting.repositories.UserRepository;
 //import org.elevenfiftyconsulting.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,9 +23,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 //import com.users.beans.User;
 //import com.users.beans.UserRole;
@@ -38,8 +39,8 @@ public class ShoppingListController {
 	@Autowired
 	private ShoppingListRepository shoppingListRepo;
 
-//	@Autowired
-//	private UserRepository userRepo;
+	@Autowired
+	private UserRepository userRepo;
 
 	@RequestMapping("/")
 	public String index(Model model) {
@@ -53,12 +54,13 @@ public class ShoppingListController {
 	
 	@RequestMapping("/shoppinglists")
 	public String shoppingLists(Model model) {
+		model.addAttribute("shoppingLists", shoppingListRepo.findAll());
 		return "shoppingListItem/shoppingList";
 	}
 
 	@GetMapping("/shoppinglist/create")
 	public String shoppingListCreate(Model model) {
-		model.addAttribute(new ShoppingList());
+		model.addAttribute("shoppingList", new ShoppingList());
 		return "shoppingListItem/shoppingListCreate";
 	}
 	
@@ -73,8 +75,16 @@ public class ShoppingListController {
 //			return "redirect:/shoppinglists";
 //		}
 		
+		User u = new User();
+		u.setFirstName("bob");
+		u.setLastName("bobby");
+		u.setActive(true);
+		userRepo.save(u);
+		shoppingList.setUser(u);
+		shoppingList.setCreatedUtc(new Date(System.currentTimeMillis()));
+		shoppingList.setModifiedUtc(new Date(System.currentTimeMillis()));
 		shoppingListRepo.save(shoppingList);
-		return "redirect:/";
+		return "redirect:/shoppinglists";
 
 	}
 
