@@ -55,15 +55,18 @@ public class ShoppingListController {
 	}
 	
 	@PostMapping("/shoppinglist/create")
-	public String shoppingListCreate(@ModelAttribute @Valid ShoppingList shoppingList, BindingResult result, Model model) {
+	public String shoppingListCreate(@ModelAttribute @Valid ShoppingList shoppingList, Model model) {
 
-		if (result.hasErrors()) {
-			model.addAttribute("shoppingList", shoppingList);
-			return "shoppingListItem/shoppingListCreate";
-		} else {
-			shoppingListRepo.save(shoppingList);
-			return "redirect:/shoppinglists";
-		}
+//		if (result.hasErrors()) {
+//			model.addAttribute("shoppingList", shoppingList);
+//			return "shoppingListItem/shoppingListCreate";
+//		} else {
+//			shoppingListRepo.save(shoppingList);
+//			return "redirect:/shoppinglists";
+//		}
+		
+		shoppingListRepo.save(shoppingList);
+		return "redirect:/shoppinglists/";
 
 	}
 
