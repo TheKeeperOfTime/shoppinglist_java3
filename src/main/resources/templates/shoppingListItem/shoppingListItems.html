@@ -22,7 +22,7 @@
 		</thead>
 		<tbody>
 			<tr th:each="i : ${shoppinglistitems}">
-				<td th:text="${i.isChecked}"></td>
+				<td><input type="checkbox" name="name1"/>&nbsp;</td>
 				<td th:text="${i.contents}"></td>
 				<td th:text="${i.options}"></td>
 				<td><a class="btn btn-primary" href="/"
