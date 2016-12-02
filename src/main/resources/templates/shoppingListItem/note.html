@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/basic">
+<head>
+<title>Shopping List Notes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body layout:fragment="content">
+	<h1>Notes</h1>
+	<a class="btn btn-success" href="/note/create"
+		th:href="@{|/note/create|}" role="button">Create New
+		Item</a>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>&nbsp;</th>
+				
+				<th>&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="i : ${note}">
+				<td><input type="checkbox" name="name1"/>&nbsp;</td>
+				<td th:text="${i.contents}"></td>
+				<td th:text="${i.priority}"></td>
+				<td><a class="btn btn-primary" href="/"
+					th:href="@{|/note/${i.id}}" role="button">View</a></td>
+				</tr>
+		</tbody>
+	</table>
+
+</body>
+</html>

@@ -108,10 +108,8 @@ public class ShoppingListController {
 	@PostMapping("/shoppinglistitem/create")
 	public String shoppingListItemCreate(@ModelAttribute @Valid ShoppingListItem shoppingListItem, BindingResult result, Model model) {
 
-		
-		
-		shoppingListItem.setPriority(null);
-		shoppingListItem.getPriority();
+//		shoppingListItem.setPriority(HIGH);
+//		shoppingListItem.getPriority();
 		shoppingListItem.setCreatedUtc(new Date(System.currentTimeMillis()));
 		shoppingListItem.setModifiedUtc(new Date(System.currentTimeMillis()));
 		shoppingListItemRepo.save(shoppingListItem);
