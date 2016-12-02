@@ -24,7 +24,7 @@
 			<tr th:each="i : ${shoppinglistitems}">
 				<td><input type="checkbox" name="name1"/>&nbsp;</td>
 				<td th:text="${i.contents}"></td>
-				<td th:text="${i.options}"></td>
+				<td th:text="${i.priority}"></td>
 				<td><a class="btn btn-primary" href="/"
 					th:href="@{|/shoppinglistitem/${i.id}}" role="button">View</a></td>
 				</tr>
