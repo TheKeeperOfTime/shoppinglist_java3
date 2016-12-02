@@ -34,33 +34,57 @@ public class ShoppingListItemController {
 	@RequestMapping("/shoppinglist/{id}")
 	public String listShoppingListItems(@PathVariable int id, Model model) {
 		model.addAttribute("id", id);
-		
-		ShoppingListItem i = shoppingListItemRepo.findOne(id);
-		model.addAttribute("shoppingListItems", i);
+		model.addAttribute("shoppingList", shoppingListRepo.findOne(id));
+		model.addAttribute("shoppingListItems", shoppingListRepo.findOne(id).getShoppingListItems());
 		return "shoppingListItem/shoppingListItems";
 	}
 	
-	//create view shoppingListItem
-	@GetMapping("/shoppinglistitem/create")
+	@GetMapping("/shoppinglist/{id}/create")
 	public String shoppingListItemCreate(Model model) {
-		model.addAttribute(new ShoppingListItem());
-		return "shoppingListItem/shoppingListItemCreate";
+		model.addAttribute("shoppingListItem", new ShoppingListItem());
+		return "shoppingListItem/shoppingListItemCreate2";
 	}
 	
-	//save created shoppingListItem
-	@PostMapping("/shoppinglistitem/create")
-	public String shoppingListItemCreate(@ModelAttribute @Valid ShoppingListItem shoppingListItem, BindingResult result, Model model) {
+	@PostMapping("/shoppinglist/{id}/create")
+	public String shoppingListItemCreate(@ModelAttribute ShoppingListItem shoppingListItem, BindingResult result, @PathVariable int id, Model model) {
 
-		
-		
+//		if (result.hasErrors()) {
+//			model.addAttribute("shoppingList", shoppingList);
+//			return "shoppingListItem/shoppingListCreate";
+//		} else {
+//			shoppingListRepo.save(shoppingList);
+//			return "redirect:/shoppinglists";
+//		}
+		shoppingListItem.setShoppingList(shoppingListRepo.findOne(id));
 		shoppingListItem.setPriority(Priority.HIGH);
-		shoppingListItem.getPriority();
 		shoppingListItem.setCreatedUtc(new Date(System.currentTimeMillis()));
 		shoppingListItem.setModifiedUtc(new Date(System.currentTimeMillis()));
 		shoppingListItemRepo.save(shoppingListItem);
+		System.out.println(shoppingListItem.getContents());
 		return "redirect:/shoppinglist/{id}";
 
 	}
+	
+//	//create view shoppingListItem
+//	@GetMapping("/shoppinglistitem/create")
+//	public String shoppingListItemCreate(Model model) {
+//		model.addAttribute(new ShoppingListItem());
+//		return "shoppingListItem/shoppingListItemCreate";
+//	}
+//	
+//	//save created shoppingListItem
+//	@PostMapping("/shoppinglistitem/create")
+//	public String shoppingListItemCreate(@ModelAttribute @Valid ShoppingListItem shoppingListItem, BindingResult result, Model model) {
+//
+//		
+//		
+//		shoppingListItem.setPriority(Priority.HIGH);
+//		shoppingListItem.setCreatedUtc(new Date(System.currentTimeMillis()));
+//		shoppingListItem.setModifiedUtc(new Date(System.currentTimeMillis()));
+//		shoppingListItemRepo.save(shoppingListItem);
+//		return "redirect:/shoppinglist/{id}";
+//
+//	}
 	
 
 }
