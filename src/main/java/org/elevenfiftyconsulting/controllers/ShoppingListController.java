@@ -13,6 +13,7 @@ import org.elevenfiftyconsulting.beans.User;
 import org.elevenfiftyconsulting.repositories.ShoppingListItemRepository;
 import org.elevenfiftyconsulting.repositories.ShoppingListRepository;
 import org.elevenfiftyconsulting.repositories.UserRepository;
+import org.elevenfiftyconsulting.security.Priority;
 //import org.elevenfiftyconsulting.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,13 +56,13 @@ public class ShoppingListController {
 	@RequestMapping("/shoppinglists")
 	public String shoppingLists(Model model) {
 		model.addAttribute("shoppingLists", shoppingListRepo.findAll());
-		return "shoppingListItem/shoppingList";
+		return "shoppingList/shoppingList";
 	}
 
 	@GetMapping("/shoppinglist/create")
 	public String shoppingListCreate(Model model) {
 		model.addAttribute("shoppingList", new ShoppingList());
-		return "shoppingListItem/shoppingListCreate";
+		return "shoppingList/shoppingListCreate";
 	}
 	
 	@PostMapping("/shoppinglist/create")
@@ -88,35 +89,6 @@ public class ShoppingListController {
 
 	}
 
-	@RequestMapping("/shoppinglist/{id}")
-	public String listShoppingListItems(@PathVariable int id, Model model) {
-		model.addAttribute("id", id);
-		
-		ShoppingListItem i = shoppingListItemRepo.findOne(id);
-		model.addAttribute("shoppingListItems", i);
-		return "shoppingListItem/shoppingListItems";
-	}
 	
-	//create view shoppingListItem
-	@GetMapping("/shoppinglistitem/create")
-	public String shoppingListItemCreate(Model model) {
-		model.addAttribute(new ShoppingListItem());
-		return "shoppingListItem/shoppingListItemCreate";
-	}
-	
-	//save created shoppingListItem
-	@PostMapping("/shoppinglistitem/create")
-	public String shoppingListItemCreate(@ModelAttribute @Valid ShoppingListItem shoppingListItem, BindingResult result, Model model) {
-
-		
-		
-		shoppingListItem.setPriority(null);
-		shoppingListItem.getPriority();
-		shoppingListItem.setCreatedUtc(new Date(System.currentTimeMillis()));
-		shoppingListItem.setModifiedUtc(new Date(System.currentTimeMillis()));
-		shoppingListItemRepo.save(shoppingListItem);
-		return "redirect:/shoppinglist/{id}";
-
-	}
 
 }
