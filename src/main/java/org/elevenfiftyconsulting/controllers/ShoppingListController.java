@@ -114,7 +114,7 @@ public class ShoppingListController {
 		shoppingListItem.setCreatedUtc(new Date(System.currentTimeMillis()));
 		shoppingListItem.setModifiedUtc(new Date(System.currentTimeMillis()));
 		shoppingListItemRepo.save(shoppingListItem);
-		return "redirect:/shoppinglist/{shoppingListId}";
+		return "redirect:/shoppinglist/{id}";
 
 	}
 
