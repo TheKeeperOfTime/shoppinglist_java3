@@ -12,8 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.elevenfiftyconsulting.security.Priority;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 
 //import org.hibernate.annotations.GenericGenerator;
 //import org.hibernate.annotations.Parameter;

@@ -110,7 +110,8 @@ public class ShoppingListController {
 
 		
 		
-		
+		shoppingListItem.setPriority(null);
+		shoppingListItem.getPriority();
 		shoppingListItem.setCreatedUtc(new Date(System.currentTimeMillis()));
 		shoppingListItem.setModifiedUtc(new Date(System.currentTimeMillis()));
 		shoppingListItemRepo.save(shoppingListItem);
