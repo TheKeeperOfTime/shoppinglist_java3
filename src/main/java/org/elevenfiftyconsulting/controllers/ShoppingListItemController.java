@@ -42,7 +42,7 @@ public class ShoppingListItemController {
 	@GetMapping("/shoppinglist/{id}/create")
 	public String shoppingListItemCreate(Model model) {
 		model.addAttribute("shoppingListItem", new ShoppingListItem());
-		return "shoppingListItem/shoppingListItemCreate2";
+		return "shoppingListItem/shoppingListItemCreate";
 	}
 	
 	@PostMapping("/shoppinglist/{id}/create")
