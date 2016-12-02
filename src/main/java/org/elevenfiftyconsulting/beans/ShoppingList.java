@@ -39,12 +39,22 @@ public class ShoppingList {
 
 	@OneToMany(mappedBy = "shoppingList")
 	private List<ShoppingListItem> shoppingListItems;
+	
+	
 
 //	public ShoppingList() {
 //		this.name = name;
 //		this.createdUtc = createdUtc;
 //		this.modifiedUtc = modifiedUtc;
 //	}
+
+	public List<ShoppingListItem> getShoppingListItems() {
+		return shoppingListItems;
+	}
+
+	public void setShoppingListItems(List<ShoppingListItem> shoppingListItems) {
+		this.shoppingListItems = shoppingListItems;
+	}
 
 	public int getId() {
 		return id;

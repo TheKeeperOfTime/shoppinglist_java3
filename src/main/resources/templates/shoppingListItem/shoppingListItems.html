@@ -9,24 +9,22 @@
 <body layout:fragment="content">
 	<h1>Products</h1>
 	<a class="btn btn-success" href="/shoppinglistitem/create"
-		th:href="@{|/shoppinglistitem/create|}" role="button">Create New
+		th:href="@{|/shoppinglist/${shoppingList.id}/create|}" role="button">Create New
 		Item</a>
 	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>&nbsp;</th>
-				<th>Contents</th>
-				<th>Options</th>
+				<th>Item</th>
+				<th>Priority</th>
 				<th>&nbsp;</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="i : ${shoppinglistitems}">
+			<tr th:each="i : ${shoppingListItems}">
 				<td><input type="checkbox" name="name1"/>&nbsp;</td>
 				<td th:text="${i.contents}"></td>
 				<td th:text="${i.priority}"></td>
-				<td><a class="btn btn-primary" href="/"
-					th:href="@{|/shoppinglistitem/${i.id}}" role="button">View</a></td>
 				</tr>
 		</tbody>
 	</table>
