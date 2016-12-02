@@ -1,12 +1,10 @@
- package org.elevenfiftyconsulting.beans;
-
+package org.elevenfiftyconsulting.beans;
 
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 //import javax.persistence.JoinColumn;
@@ -24,8 +22,8 @@ import org.hibernate.annotations.Parameter;
 public class ShoppingList {
 
 	@Id
-	@GeneratedValue(generator="myGenerator")
-	@GenericGenerator(name="myGenerator", strategy="foreign", parameters=@Parameter (value="user", name = "property"))
+	@GeneratedValue(generator = "myGenerator")
+	@GenericGenerator(name = "myGenerator", strategy = "foreign", parameters = @Parameter(value = "user", name = "property"))
 	private int id;
 
 	@OneToOne(optional = false)
@@ -62,7 +60,7 @@ public class ShoppingList {
 	public User getUser() {
 		return user;
 	}
-	
+
 	public void setUser(User user) {
 		this.user = user;
 	}
