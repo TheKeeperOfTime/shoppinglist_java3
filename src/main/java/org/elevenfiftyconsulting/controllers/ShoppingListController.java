@@ -7,7 +7,6 @@ import java.util.Date;
 import org.elevenfiftyconsulting.beans.ShoppingList;
 import org.elevenfiftyconsulting.beans.User;
 //import org.elevenfiftyconsulting.repositories.NoteRepository;
-import org.elevenfiftyconsulting.repositories.ShoppingListItemRepository;
 import org.elevenfiftyconsulting.repositories.ShoppingListRepository;
 import org.elevenfiftyconsulting.repositories.UserRepository;
 //import org.elevenfiftyconsulting.repositories.UserRepository;
@@ -17,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -29,8 +29,6 @@ public class ShoppingListController {
 //	@Autowired
 //	private NoteRepository noteRepo;
 
-	@Autowired
-	private ShoppingListItemRepository shoppingListItemRepo;
 
 	@Autowired
 	private ShoppingListRepository shoppingListRepo;
@@ -40,13 +38,15 @@ public class ShoppingListController {
 
 	@RequestMapping("/")
 	public String index(Model model) {
-		return "redirect:/shoppinglists";
+		return "index";
 	}
 	
 	@RequestMapping("/home")
 	public String home(Model model) {
 		return "index";
 	}
+	
+	
 	
 	@RequestMapping("/shoppinglists")
 	public String shoppingLists(Model model) {
@@ -71,12 +71,13 @@ public class ShoppingListController {
 //			return "redirect:/shoppinglists";
 //		}
 		
-		User u = new User();
-		u.setFirstName("bob");
-		u.setLastName("bobby");
-		u.setActive(true);
-		userRepo.save(u);
-		shoppingList.setUser(u);
+//		User u = new User();
+//		u.setFirstName("bob");
+//		u.setLastName("bobby");
+//		u.setEmail("bobby@bobbysworld.com");
+//		u.setActive(true);
+//		userRepo.save(u);
+//		shoppingList.setUser(u);
 		shoppingList.setCreatedUtc(new Date(System.currentTimeMillis()));
 		shoppingList.setModifiedUtc(new Date(System.currentTimeMillis()));
 		shoppingListRepo.save(shoppingList);

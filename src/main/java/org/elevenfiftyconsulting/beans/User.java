@@ -1,9 +1,13 @@
 package org.elevenfiftyconsulting.beans;
 
+import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -12,10 +16,18 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private long id;
 
 	private String firstName;
 	private String lastName;
+	
+	@Column(unique = true)
+	private String email;
+	
+	private String password;
+	
+	@OneToMany(mappedBy = "user")
+	private List<ShoppingList> shoppingLists;
 
 	private boolean active;
 
@@ -23,16 +35,26 @@ public class User {
 		active = true;
 	}
 
-	public User(String firstName, String lastName, boolean active) {
+	public User(String firstName, String lastName, String email, String password, boolean active) {
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.email = email;
+		this.password =  password;
 		this.active = active;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", " + (firstName != null ? "firstName=" + firstName + ", " : "")
-				+ (lastName != null ? "lastName=" + lastName + ", " : "") + "active=" + active + "]";
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", password=" + password + ", shoppingLists=" + shoppingLists + ", active=" + active + "]";
+	}
+
+	public List<ShoppingList> getShoppingLists() {
+		return shoppingLists;
+	}
+
+	public void setShoppingLists(List<ShoppingList> shoppingLists) {
+		this.shoppingLists = shoppingLists;
 	}
 
 	public String getFirstName() {
@@ -63,8 +85,52 @@ public class User {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
+
+	
+	public String getEmail() {
+		return email;
+	}
+
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
+	
+	
+	
 
 }

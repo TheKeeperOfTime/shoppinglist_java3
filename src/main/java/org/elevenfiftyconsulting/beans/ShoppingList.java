@@ -24,7 +24,7 @@ public class ShoppingList {
 	@Id
 	@GeneratedValue(generator = "myGenerator")
 	@GenericGenerator(name = "myGenerator", strategy = "foreign", parameters = @Parameter(value = "user", name = "property"))
-	private int id;
+	private long id;
 
 	@OneToOne(optional = false)
 	@JoinColumn(name = "user_id")
@@ -56,11 +56,11 @@ public class ShoppingList {
 		this.shoppingListItems = shoppingListItems;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -108,7 +108,7 @@ public class ShoppingList {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + (int) (id ^ (id >>> 32));
 		return result;
 	}
 
@@ -125,7 +125,5 @@ public class ShoppingList {
 			return false;
 		return true;
 	}
-	
-	
 
 }
