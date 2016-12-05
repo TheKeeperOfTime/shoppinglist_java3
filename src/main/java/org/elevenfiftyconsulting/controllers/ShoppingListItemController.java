@@ -48,13 +48,7 @@ public class ShoppingListItemController {
 	@PostMapping("/shoppinglist/{id}/create")
 	public String shoppingListItemCreate(@ModelAttribute ShoppingListItem shoppingListItem, BindingResult result, @PathVariable int id, Model model) {
 
-//		if (result.hasErrors()) {
-//			model.addAttribute("shoppingList", shoppingList);
-//			return "shoppingListItem/shoppingListCreate";
-//		} else {
-//			shoppingListRepo.save(shoppingList);
-//			return "redirect:/shoppinglists";
-//		}
+
 		shoppingListItem.setShoppingList(shoppingListRepo.findOne(id));
 		shoppingListItem.setPriority(Priority.HIGH);
 		shoppingListItem.setCreatedUtc(new Date(System.currentTimeMillis()));
@@ -65,26 +59,27 @@ public class ShoppingListItemController {
 
 	}
 	
-//	//create view shoppingListItem
-//	@GetMapping("/shoppinglistitem/create")
-//	public String shoppingListItemCreate(Model model) {
-//		model.addAttribute(new ShoppingListItem());
-//		return "shoppingListItem/shoppingListItemCreate";
-//	}
-//	
-//	//save created shoppingListItem
-//	@PostMapping("/shoppinglistitem/create")
-//	public String shoppingListItemCreate(@ModelAttribute @Valid ShoppingListItem shoppingListItem, BindingResult result, Model model) {
-//
-//		
-//		
-//		shoppingListItem.setPriority(Priority.HIGH);
-//		shoppingListItem.setCreatedUtc(new Date(System.currentTimeMillis()));
-//		shoppingListItem.setModifiedUtc(new Date(System.currentTimeMillis()));
-//		shoppingListItemRepo.save(shoppingListItem);
-//		return "redirect:/shoppinglist/{id}";
-//
-//	}
+	// delete page view
+		@GetMapping("/shoppinglistitem/{id}/delete")
+		public String shoppingListItemDelete(Model model, @PathVariable(name = "id") int id) {
+			model.addAttribute("id", id);
+			ShoppingListItem i =shoppingListItemRepo.findOne(id);
+			model.addAttribute("shoppingListItem", i);
+			return "shoppinglistItem/shoppingListItemDelete";
+		}
+
+		// deletes the product after submit is pressed
+		@PostMapping("/shoppinglistitem/{id}/delete")
+		public String shoppingListItemDeleteSave(@PathVariable(name = "id") int id, @ModelAttribute @Valid ShoppingListItem shoppingListItem,
+				BindingResult result, Model model) {
+			if (result.hasErrors()) {
+				model.addAttribute("shoppingListItem", shoppingListItem);
+				return "shoppingListItem/shoppingListItems";
+			} else {
+				shoppingListItemRepo.delete(shoppingListItem);
+				return "redirect:/shoppinglists";
+			}
+		}
 	
 
 }

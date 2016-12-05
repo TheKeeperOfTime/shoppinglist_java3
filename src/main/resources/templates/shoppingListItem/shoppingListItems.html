@@ -25,6 +25,7 @@
 				<td><input type="checkbox" name="name1"/>&nbsp;</td>
 				<td th:text="${i.contents}"></td>
 				<td th:text="${i.priority}"></td>
+				<td><a class="btn btn-info" href="/" th:href="@{|/shoppinglistitem/${i.id}/delete|}" role="button">Delete</a></td>
 				</tr>
 		</tbody>
 	</table>
