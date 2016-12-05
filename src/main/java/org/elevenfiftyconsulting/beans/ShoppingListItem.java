@@ -22,7 +22,7 @@ public class ShoppingListItem {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private long id;
 
 	@ManyToOne
 	@JoinColumn(name = "shopping_list_id")
@@ -52,11 +52,11 @@ public class ShoppingListItem {
 				+ ", modifiedUtc=" + modifiedUtc + "]";
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -112,7 +112,7 @@ public class ShoppingListItem {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + (int) (id ^ (id >>> 32));
 		return result;
 	}
 
@@ -129,10 +129,6 @@ public class ShoppingListItem {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
 
+	
 }

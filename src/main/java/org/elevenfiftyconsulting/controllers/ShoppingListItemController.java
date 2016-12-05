@@ -2,9 +2,11 @@ package org.elevenfiftyconsulting.controllers;
 
 import java.util.Date;
 
+import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 
 import org.elevenfiftyconsulting.beans.ShoppingListItem;
+import org.elevenfiftyconsulting.beans.User;
 import org.elevenfiftyconsulting.repositories.ShoppingListItemRepository;
 import org.elevenfiftyconsulting.repositories.ShoppingListRepository;
 import org.elevenfiftyconsulting.repositories.UserRepository;
@@ -28,11 +30,18 @@ public class ShoppingListItemController {
 	@Autowired
 	private ShoppingListRepository shoppingListRepo;
 
-	@Autowired
-	private UserRepository userRepo;
+	private static UserRepository userRepo;
+
+    @Autowired
+    private UserRepository userrRepo;
+
+    @PostConstruct
+    public void initStaticUserRepo() {
+        userRepo = this.userrRepo;
+    }
 	
 	@RequestMapping("/shoppinglist/{id}")
-	public String listShoppingListItems(@PathVariable int id, Model model) {
+	public String listShoppingListItems(@PathVariable long id, Model model) {
 		model.addAttribute("id", id);
 		model.addAttribute("shoppingList", shoppingListRepo.findOne(id));
 		model.addAttribute("shoppingListItems", shoppingListRepo.findOne(id).getShoppingListItems());
@@ -46,7 +55,7 @@ public class ShoppingListItemController {
 	}
 	
 	@PostMapping("/shoppinglist/{id}/create")
-	public String shoppingListItemCreate(@ModelAttribute ShoppingListItem shoppingListItem, BindingResult result, @PathVariable int id, Model model) {
+	public String shoppingListItemCreate(@ModelAttribute ShoppingListItem shoppingListItem, BindingResult result, @PathVariable long id, Model model) {
 
 //		if (result.hasErrors()) {
 //			model.addAttribute("shoppingList", shoppingList);
@@ -85,6 +94,13 @@ public class ShoppingListItemController {
 //		return "redirect:/shoppinglist/{id}";
 //
 //	}
+	
+	public static User getCurrentUser (){
+		User currentUser = new User();
+        String email = currentUser.getUserEmail();
+        currentUser = userRepo.findOneByEmail(email);
+        return currentUser;
+	}
 	
 
 }
