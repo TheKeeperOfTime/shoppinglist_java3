@@ -8,15 +8,28 @@
 </head>
 <body layout:fragment="content">
 	<h1>Shopping List</h1>
-	<form method="POST" th:object="${shoppingListItem}" enctype="multipart/form-data">
+	
+	
+	
+	
+	<form method="POST" th:object="${shoppingListItem}">
 		<input type="hidden" name="id" th:value="*{id}" />
 		
-		<div class="field">
+		<dl class="dl-horizontal" th:if="${shoppingList}">
+			<dt>Item</dt>
+			<dd th:text="${shoppingListItem.contents}"></dd>
+		
+		
+		</dl>
+		
+		<button type="submit" class="btn btn-default">delete</button>
+		
+		<!-- <div class="field">
 			<label for="contents">Content</label> <input name="contents" type="text"
 				th:field="${shoppingListItem.contents}" />
 		</div>
 
-		<button type="submit" class="btn btn-default">Save</button>
+		<button type="submit" class="btn btn-default">delete</button>-->
 	</form>
 </body>
 </html>
