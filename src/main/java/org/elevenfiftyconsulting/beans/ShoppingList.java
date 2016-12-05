@@ -3,30 +3,28 @@ package org.elevenfiftyconsulting.beans;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 //import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 //import javax.persistence.OneToOne;
 //import javax.persistence.GenerationType;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
-
 @Entity
-@Table(name = "shopping_list")
+@Table(name = "shopping_lists")
 public class ShoppingList {
 
 	@Id
-	@GeneratedValue(generator = "myGenerator")
-	@GenericGenerator(name = "myGenerator", strategy = "foreign", parameters = @Parameter(value = "user", name = "property"))
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@OneToOne(optional = false)
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "user_id")
 	private User user;
 
@@ -37,7 +35,7 @@ public class ShoppingList {
 	private Date createdUtc;
 	private Date modifiedUtc;
 
-	@OneToMany(mappedBy = "shoppingList")
+	@OneToMany(mappedBy = "shoppingList", cascade = CascadeType.ALL)
 	private List<ShoppingListItem> shoppingListItems;
 	
 	

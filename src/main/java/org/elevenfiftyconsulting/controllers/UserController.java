@@ -123,5 +123,7 @@ public class UserController {
 		return profile(permissionService.findCurrentUserId(), model);
 	}
 	
+	
+	
 
 }

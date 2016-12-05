@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -30,6 +33,12 @@ public class User {
 	private List<ShoppingList> shoppingLists;
 
 	private boolean active;
+	
+	public String getUserEmail (){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String email = auth.getName();
+        return email;
+	}
 
 	public User() {
 		active = true;

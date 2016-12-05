@@ -4,6 +4,8 @@ package org.elevenfiftyconsulting.controllers;
 
 import java.util.Date;
 
+import javax.annotation.PostConstruct;
+
 import org.elevenfiftyconsulting.beans.ShoppingList;
 import org.elevenfiftyconsulting.beans.User;
 //import org.elevenfiftyconsulting.repositories.NoteRepository;
@@ -16,7 +18,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -33,8 +34,16 @@ public class ShoppingListController {
 	@Autowired
 	private ShoppingListRepository shoppingListRepo;
 
-	@Autowired
-	private UserRepository userRepo;
+	
+	private static UserRepository userRepo;
+
+    @Autowired
+    private UserRepository userrRepo;
+
+    @PostConstruct
+    public void initStaticUserRepo() {
+        userRepo = this.userrRepo;
+    }
 
 	@RequestMapping("/")
 	public String index(Model model) {
@@ -47,10 +56,10 @@ public class ShoppingListController {
 	}
 	
 	
-	
 	@RequestMapping("/shoppinglists")
 	public String shoppingLists(Model model) {
-		model.addAttribute("shoppingLists", shoppingListRepo.findAll());
+		User currentUser = ShoppingListController.getCurrentUser();
+		model.addAttribute("shoppingLists", shoppingListRepo.findAllByUser(currentUser));
 		return "shoppingList/shoppingList";
 	}
 
@@ -62,7 +71,7 @@ public class ShoppingListController {
 	
 	@PostMapping("/shoppinglist/create")
 	public String shoppingListCreate(@ModelAttribute ShoppingList shoppingList, BindingResult result, Model model) {
-
+		User currentUser = ShoppingListController.getCurrentUser();
 //		if (result.hasErrors()) {
 //			model.addAttribute("shoppingList", shoppingList);
 //			return "shoppingListItem/shoppingListCreate";
@@ -71,13 +80,7 @@ public class ShoppingListController {
 //			return "redirect:/shoppinglists";
 //		}
 		
-//		User u = new User();
-//		u.setFirstName("bob");
-//		u.setLastName("bobby");
-//		u.setEmail("bobby@bobbysworld.com");
-//		u.setActive(true);
-//		userRepo.save(u);
-//		shoppingList.setUser(u);
+		shoppingList.setUser(currentUser);
 		shoppingList.setCreatedUtc(new Date(System.currentTimeMillis()));
 		shoppingList.setModifiedUtc(new Date(System.currentTimeMillis()));
 		shoppingListRepo.save(shoppingList);
@@ -85,7 +88,12 @@ public class ShoppingListController {
 
 	}
 
-	
+	public static User getCurrentUser (){
+		User currentUser = new User();
+        String email = currentUser.getUserEmail();
+        currentUser = userRepo.findOneByEmail(email);
+        return currentUser;
+	}
 
 
 
