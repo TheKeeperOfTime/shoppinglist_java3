@@ -13,7 +13,7 @@
 	
 	
 	<form method="POST" th:object="${shoppingListItem}">
-		<input type="hidden" name="id" th:value="*{id}" />
+		<input type="hidden" name="id" th:value="${id}" />
 		
 		<dl class="dl-horizontal" th:if="${shoppingList}">
 			<dt>Item</dt>

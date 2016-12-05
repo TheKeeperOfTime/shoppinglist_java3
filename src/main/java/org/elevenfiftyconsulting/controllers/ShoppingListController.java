@@ -1,5 +1,6 @@
 package org.elevenfiftyconsulting.controllers;
 //
+
 //import static com.users.security.Role.ROLE_USER;
 
 import java.util.Date;
@@ -27,35 +28,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ShoppingListController {
 
-//	@Autowired
-//	private NoteRepository noteRepo;
-
+	// @Autowired
+	// private NoteRepository noteRepo;
 
 	@Autowired
 	private ShoppingListRepository shoppingListRepo;
 
-	
 	private static UserRepository userRepo;
 
-    @Autowired
-    private UserRepository userrRepo;
+	@Autowired
+	private UserRepository userrRepo;
 
-    @PostConstruct
-    public void initStaticUserRepo() {
-        userRepo = this.userrRepo;
-    }
+	@PostConstruct
+	public void initStaticUserRepo() {
+		userRepo = this.userrRepo;
+	}
 
 	@RequestMapping("/")
 	public String index(Model model) {
 		return "index";
 	}
-	
+
 	@RequestMapping("/home")
 	public String home(Model model) {
 		return "index";
 	}
-	
-	
+
 	@RequestMapping("/shoppinglists")
 	public String shoppingLists(Model model) {
 		User currentUser = ShoppingListController.getCurrentUser();
@@ -68,33 +66,27 @@ public class ShoppingListController {
 		model.addAttribute("shoppingList", new ShoppingList());
 		return "shoppingList/shoppingListCreate";
 	}
-	
+
 	@PostMapping("/shoppinglist/create")
 	public String shoppingListCreate(@ModelAttribute ShoppingList shoppingList, BindingResult result, Model model) {
 		User currentUser = ShoppingListController.getCurrentUser();
-//		if (result.hasErrors()) {
-//			model.addAttribute("shoppingList", shoppingList);
-//			return "shoppingListItem/shoppingListCreate";
-//		} else {
-//			shoppingListRepo.save(shoppingList);
-//			return "redirect:/shoppinglists";
-//		}
-		
-		shoppingList.setUser(currentUser);
-		shoppingList.setCreatedUtc(new Date(System.currentTimeMillis()));
-		shoppingList.setModifiedUtc(new Date(System.currentTimeMillis()));
-		shoppingListRepo.save(shoppingList);
-		return "redirect:/shoppinglists";
-
+		if (result.hasErrors()) {
+			model.addAttribute("shoppingList", shoppingList);
+			return "shoppingListItem/shoppingListCreate";
+		} else {
+			shoppingList.setUser(currentUser);
+			shoppingList.setCreatedUtc(new Date(System.currentTimeMillis()));
+			shoppingList.setModifiedUtc(new Date(System.currentTimeMillis()));
+			shoppingListRepo.save(shoppingList);
+			return "redirect:/shoppinglists";
+		}
 	}
 
-	public static User getCurrentUser (){
+	public static User getCurrentUser() {
 		User currentUser = new User();
-        String email = currentUser.getUserEmail();
-        currentUser = userRepo.findOneByEmail(email);
-        return currentUser;
+		String email = currentUser.getUserEmail();
+		currentUser = userRepo.findOneByEmail(email);
+		return currentUser;
 	}
-
-
 
 }
