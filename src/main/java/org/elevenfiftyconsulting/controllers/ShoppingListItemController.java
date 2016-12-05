@@ -69,25 +69,24 @@ public class ShoppingListItemController {
 	}
 	
 	// delete page view
-		@GetMapping("/shoppinglistitem/{id}/delete")
-		public String shoppingListItemDelete(Model model, @PathVariable(name = "id") int id) {
+		@GetMapping("/shoppinglist/{id}/{itemid}/delete")
+		public String shoppingListItemDelete(Model model, @PathVariable(name = "id") long id, @PathVariable(name = "itemid") long itemid) {
 			model.addAttribute("id", id);
-			ShoppingListItem i =shoppingListItemRepo.findOne(id);
+			ShoppingListItem i = shoppingListItemRepo.findOne(itemid);
 			model.addAttribute("shoppingListItem", i);
+			model.addAttribute("shoppingList", shoppingListRepo.findOne(id));
 			return "shoppinglistItem/shoppingListItemDelete";
 		}
 
 		// deletes the product after submit is pressed
-		@PostMapping("/shoppinglistitem/{id}/delete")
-		public String shoppingListItemDeleteSave(@PathVariable(name = "id") int id, @ModelAttribute @Valid ShoppingListItem shoppingListItem,
+		@PostMapping("/shoppinglist/{id}/{itemid}/delete")
+		public String shoppingListItemDeleteSave(@PathVariable(name = "id") long id, @PathVariable(name = "itemid") long itemid, @ModelAttribute @Valid ShoppingListItem shoppingListItem,
 				BindingResult result, Model model) {
-			if (result.hasErrors()) {
-				model.addAttribute("shoppingListItem", shoppingListItem);
-				return "shoppingListItem/shoppingListItems";
-			} else {
-				shoppingListItemRepo.delete(shoppingListItem);
-				return "redirect:/shoppinglists";
-			}
+				ShoppingListItem i = shoppingListItemRepo.findOne(itemid);
+				System.out.println(i.getShoppingList().getId());
+				shoppingListItemRepo.delete(i);
+				return "redirect:/shoppinglist/{id}";
+			
 		}
 	
 	public static User getCurrentUser (){
