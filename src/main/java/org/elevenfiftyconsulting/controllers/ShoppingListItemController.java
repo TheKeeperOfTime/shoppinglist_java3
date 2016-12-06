@@ -91,6 +91,31 @@ public class ShoppingListItemController {
 				return "redirect:/shoppinglist/{id}";
 			
 		}
+		
+		// delete page view
+
+		@GetMapping("/shoppinglist/{id}/{itemid}/deleteAll")
+		public String shoppingListItemDeleteAll(Model model, @PathVariable(name = "id") long id, @PathVariable(name = "itemid") long itemid) {
+
+			model.addAttribute("id", id);
+			ShoppingListItem i = shoppingListItemRepo.findOne(itemid);
+			model.addAttribute("shoppingListItem", i);
+			model.addAttribute("shoppingList", shoppingListRepo.findOne(id));
+			return "shoppinglistItem/shoppingListItemDelete";
+		}
+
+		// deletes the product after submit is pressed
+
+		@PostMapping("/shoppinglist/{id}/{itemid}/deleteAll")
+		public String shoppingListItemDeleteSaveAll(@PathVariable(name = "id") long id, @PathVariable(name = "itemid") long itemid, @ModelAttribute @Valid ShoppingListItem shoppingListItem,
+
+				BindingResult result, Model model) {
+				ShoppingListItem i = shoppingListItemRepo.findOne(itemid);
+				System.out.println(i.getShoppingList().getId());
+				shoppingListItemRepo.delete(i);
+				return "redirect:/shoppinglist/{id}";
+			
+		}
 	
 	public static User getCurrentUser (){
 		User currentUser = new User();
