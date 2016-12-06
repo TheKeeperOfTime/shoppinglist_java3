@@ -30,7 +30,7 @@ public class ShoppingListItem {
 
 	private String contents;
 	private Integer priority;
-	private boolean isChecked;
+	public boolean isChecked;
 	private Date createdUtc;
 	private Date modifiedUtc;
 

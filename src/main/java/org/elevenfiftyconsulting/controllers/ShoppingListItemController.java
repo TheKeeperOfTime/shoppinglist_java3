@@ -59,12 +59,37 @@ public class ShoppingListItemController {
 
 
 		shoppingListItem.setShoppingList(shoppingListRepo.findOne(id));
+		shoppingListItem.setChecked(false);
 		shoppingListItem.setCreatedUtc(new Date(System.currentTimeMillis()));
 		shoppingListItem.setModifiedUtc(new Date(System.currentTimeMillis()));
 		shoppingListItemRepo.save(shoppingListItem);
 		System.out.println(shoppingListItem.getContents());
 		return "redirect:/shoppinglist/{id}";
 
+	}
+	
+	@GetMapping("/shoppinglist/{id}/check/{itemid}")
+	public String shoppingListItemCheck(Model model, @PathVariable(name = "id") long id,
+			@PathVariable(name = "itemid") long itemid) {
+		
+		ShoppingListItem i = shoppingListItemRepo.findOne(itemid);
+		i.setChecked(true);
+		shoppingListItemRepo.save(i);
+		model.addAttribute("shoppingList", shoppingListRepo.findOne(id));
+		model.addAttribute("shoppingListItems", shoppingListRepo.findOne(id).getShoppingListItems());
+		return "redirect:/shoppinglist/{id}";
+	}
+	
+	@GetMapping("/shoppinglist/{id}/uncheck/{itemid}")
+	public String shoppingListItemUncheck(Model model, @PathVariable(name = "id") long id,
+			@PathVariable(name = "itemid") long itemid) {
+		
+		ShoppingListItem i = shoppingListItemRepo.findOne(itemid);
+		i.setChecked(false);
+		shoppingListItemRepo.save(i);
+		model.addAttribute("shoppingList", shoppingListRepo.findOne(id));
+		model.addAttribute("shoppingListItems", shoppingListRepo.findOne(id).getShoppingListItems());
+		return "redirect:/shoppinglist/{id}";
 	}
 	
 	// delete page view
