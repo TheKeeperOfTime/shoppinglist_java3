@@ -6,8 +6,10 @@ package org.elevenfiftyconsulting.controllers;
 import java.util.Date;
 
 import javax.annotation.PostConstruct;
+import javax.validation.Valid;
 
 import org.elevenfiftyconsulting.beans.ShoppingList;
+import org.elevenfiftyconsulting.beans.ShoppingListItem;
 import org.elevenfiftyconsulting.beans.User;
 //import org.elevenfiftyconsulting.repositories.NoteRepository;
 import org.elevenfiftyconsulting.repositories.ShoppingListRepository;
@@ -19,6 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -80,6 +83,27 @@ public class ShoppingListController {
 			shoppingListRepo.save(shoppingList);
 			return "redirect:/shoppinglists";
 		}
+	}
+	
+	@GetMapping("/shoppinglist/{id}/delete")
+	public String shoppingListDelete(Model model, @PathVariable(name = "id") long id) {
+
+		model.addAttribute("id", id);
+		ShoppingList i = shoppingListRepo.findOne(id);
+		model.addAttribute("shoppingList", i);
+		model.addAttribute("shoppingList", shoppingListRepo.findOne(id));
+		return "shoppinglist/shoppingListDelete";
+	}
+	
+	@PostMapping("/shoppinglist/{id}/delete")
+	public String shoppingListDeleteSave(@PathVariable(name = "id") long id, @ModelAttribute @Valid ShoppingList shoppingList,
+
+			BindingResult result, Model model) {
+			ShoppingList i = shoppingListRepo.findOne(id);
+			
+			shoppingListRepo.delete(i);
+			return "redirect:/shoppinglists";
+		
 	}
 
 	public static User getCurrentUser() {
