@@ -11,6 +11,9 @@
 	<a class="btn btn-success" href="/shoppinglistitem/create"
 		th:href="@{|/shoppinglist/${shoppingList.id}/create|}" role="button">Create
 		New Item</a>
+	<a class="btn btn-info" href="/"
+		th:href="@{|/shoppinglist/${shoppingList.id}/delete|}"
+		role="button">Delete All</a>
 	<table class="table table-hover">
 		<thead>
 			<tr>
