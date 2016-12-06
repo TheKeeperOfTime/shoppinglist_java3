@@ -59,7 +59,6 @@ public class ShoppingListItemController {
 
 
 		shoppingListItem.setShoppingList(shoppingListRepo.findOne(id));
-		shoppingListItem.setPriority(Priority.HIGH);
 		shoppingListItem.setCreatedUtc(new Date(System.currentTimeMillis()));
 		shoppingListItem.setModifiedUtc(new Date(System.currentTimeMillis()));
 		shoppingListItemRepo.save(shoppingListItem);
