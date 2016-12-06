@@ -29,7 +29,7 @@ public class ShoppingListItem {
 	private ShoppingList shoppingList;
 
 	private String contents;
-	private Priority priority;
+	private Integer priority;
 	private boolean isChecked;
 	private Date createdUtc;
 	private Date modifiedUtc;
@@ -37,7 +37,7 @@ public class ShoppingListItem {
 	public ShoppingListItem() {
 	}
 
-	public ShoppingListItem(String Contents, Priority Priority, boolean isChecked, Date CreatedUtc, Date ModifiedUtc) {
+	public ShoppingListItem(String Contents, Integer Priority, boolean isChecked, Date CreatedUtc, Date ModifiedUtc) {
 		this.contents = Contents;
 		this.priority = Priority;
 		this.isChecked = isChecked;
@@ -76,11 +76,11 @@ public class ShoppingListItem {
 		this.contents = contents;
 	}
 
-	public Priority getPriority() {
+	public Integer getPriority() {
 		return priority;
 	}
 
-	public void setPriority(Priority priority) {
+	public void setPriority(Integer priority) {
 		this.priority = priority;
 	}
 
@@ -130,5 +130,4 @@ public class ShoppingListItem {
 		return true;
 	}
 
-	
 }

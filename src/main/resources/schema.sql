@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS heroku_cc1579a21c316f1.shopping_list_items (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   shopping_list_id INT NOT NULL,
   contents VARCHAR(100) NOT NULL,
-  priority INT UNSIGNED NOT NULL,
+  priority INT NOT NULL,
   is_checked tinyint(1) NOT NULL DEFAULT 1,
   created_utc TIMESTAMP NOT NULL,
   modified_utc TIMESTAMP NOT NULL,

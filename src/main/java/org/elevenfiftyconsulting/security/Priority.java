@@ -1,15 +1,24 @@
 package org.elevenfiftyconsulting.security;
 
 public enum Priority {
-	HIGH(1), LOW(3), MEDIUM(2);
-	private int value;
+	PRIORITYONE(1, "Grab it now!"), PRIORITYTWO(2, "Need it soon"), PRIORITYTHREE(3, "It can wait");
+	
+	private final String displayText;
+	
+	private final Integer num;
+	
 
-	Priority(int value) {
-		this.value = value;
+	Priority(Integer num, String displayText) {
+		this.num = num;
+		this.displayText = displayText;
 	}
 
-	public int getValue() {
-		return value;
+	public Integer getNum() {
+		return num;
+	}
+	
+	public String getDisplayText() {
+		return displayText;
 	}
 
 }

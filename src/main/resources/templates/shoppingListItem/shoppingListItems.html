@@ -24,7 +24,9 @@
 			<tr th:each="i : ${shoppingListItems}">
 				<td><input type="checkbox" name="name1"/>&nbsp;</td>
 				<td th:text="${i.contents}"></td>
-				<td th:text="${i.priority}"></td>
+				<td th:if="${i.priority} == 1">Grab it now!</td>
+				<td th:if="${i.priority} == 2">Need it soon</td>
+				<td th:if="${i.priority} == 3">It can wait</td>
 				<td><a class="btn btn-info" href="/" th:href="@{|/shoppinglist/${shoppingList.id}/${i.id}/delete|}" role="button">Delete</a></td>
 				</tr>
 		</tbody>
