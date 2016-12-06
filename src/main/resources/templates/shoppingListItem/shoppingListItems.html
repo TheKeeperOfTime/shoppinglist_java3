@@ -25,7 +25,9 @@
 		</thead>
 		<tbody>
 			<tr th:each="i : ${shoppingListItems}">
-				<td><input type="checkbox" name="name1" />&nbsp;</td>
+				<!-- <td><input type="checkbox" name="name1" value="true"/>&nbsp;</td> -->
+				<td th:if="${i.isChecked} == true"><a th:href="@{|/shoppinglist/${shoppingList.id}/uncheck/${i.id}|}"><i class="fa fa-check-square-o" aria-hidden="true"></i></a></td>
+				<td th:if="${i.isChecked} == false"><a th:href="@{|/shoppinglist/${shoppingList.id}/check/${i.id}|}"><i class="fa fa-square-o" aria-hidden="true"></i></a></td>
 				<td th:text="${i.contents}"></td>
 				<td th:if="${i.priority} == 1">Grab it now!</td>
 				<td th:if="${i.priority} == 2">Need it soon</td>
