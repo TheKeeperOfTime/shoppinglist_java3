@@ -69,8 +69,10 @@ public class ShoppingListItemController {
 	}
 	
 	// delete page view
+
 		@GetMapping("/shoppinglist/{id}/{itemid}/delete")
 		public String shoppingListItemDelete(Model model, @PathVariable(name = "id") long id, @PathVariable(name = "itemid") long itemid) {
+
 			model.addAttribute("id", id);
 			ShoppingListItem i = shoppingListItemRepo.findOne(itemid);
 			model.addAttribute("shoppingListItem", i);
@@ -79,8 +81,10 @@ public class ShoppingListItemController {
 		}
 
 		// deletes the product after submit is pressed
+
 		@PostMapping("/shoppinglist/{id}/{itemid}/delete")
 		public String shoppingListItemDeleteSave(@PathVariable(name = "id") long id, @PathVariable(name = "itemid") long itemid, @ModelAttribute @Valid ShoppingListItem shoppingListItem,
+
 				BindingResult result, Model model) {
 				ShoppingListItem i = shoppingListItemRepo.findOne(itemid);
 				System.out.println(i.getShoppingList().getId());
