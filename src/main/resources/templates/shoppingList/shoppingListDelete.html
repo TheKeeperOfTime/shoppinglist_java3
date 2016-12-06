@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layouts/basic">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body layout:fragment="content">
+	<h1>Shopping List Delete</h1>
+	
+	
+	
+	
+	<form method="POST" th:object="${shoppingList}">
+		<input type="hidden" name="id" th:value="${id}" />
+		
+		<dl class="dl-horizontal" th:if="${shoppingList}">
+			<dt>Name</dt>
+			<dd th:text="${shoppingList.name}"></dd>
+		
+		
+		</dl>
+		
+		
+		
+		<button type="submit" class="btn btn-default">delete</button>
+		
+		<!-- <div class="field">
+			<label for="contents">Content</label> <input name="contents" type="text"
+				th:field="${shoppingListItem.contents}" />
+		</div>
+
+		<button type="submit" class="btn btn-default">delete</button>-->
+	</form>
+</body>
+</html>
