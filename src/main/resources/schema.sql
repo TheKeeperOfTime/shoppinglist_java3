@@ -4,7 +4,15 @@ CREATE TABLE IF NOT EXISTS heroku_cc1579a21c316f1.users (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   first_name VARCHAR(45) NOT NULL,
   last_name VARCHAR(45) NOT NULL,
+  password VARCHAR(45) NOT NULL,
+  email VARCHAR(128) NULL,
   active tinyint(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (id));
+  
+CREATE TABLE IF NOT EXISTS heroku_cc1579a21c316f1.user_roles (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  user_id INT NOT NULL,
+  role VARCHAR(45) NOT NULL,
   PRIMARY KEY (id));
 
 CREATE TABLE IF NOT EXISTS heroku_cc1579a21c316f1.shopping_lists(
@@ -20,7 +28,7 @@ CREATE TABLE IF NOT EXISTS heroku_cc1579a21c316f1.shopping_list_items (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   shopping_list_id INT NOT NULL,
   contents VARCHAR(100) NOT NULL,
-  priority INT UNSIGNED NOT NULL,
+  priority INT NOT NULL,
   is_checked tinyint(1) NOT NULL DEFAULT 1,
   created_utc TIMESTAMP NOT NULL,
   modified_utc TIMESTAMP NOT NULL,

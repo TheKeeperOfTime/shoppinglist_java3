@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layouts/basic">
+<head>
+<title>The Branches Small Groups</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+
+</head>
+<body layout:fragment="content">
+	<div class="field" id="login-panel">
+		<h1>Welcome</h1>
+		<div th:if="${param.error}">Invalid username and password.</div>
+		<div th:if="${param.logout}">You have been logged out.</div>
+		<form th:action="@{/login}" method="post">
+			<div>
+				<label> Email : </label>
+				<input class="login-input" type="text" name="username" />
+			</div>
+			<div>
+				<label> Password: </label>
+				<input class="login-input" type="password" name="password" />
+			</div>
+			<div>
+				<input class="btn btn-success" type="submit" value="Sign In" />
+			</div>
+		</form>
+		<a th:href="@{|/register|}">Register</a>
+	</div>
+</body>
+</html>

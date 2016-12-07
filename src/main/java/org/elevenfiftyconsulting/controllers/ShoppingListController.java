@@ -1,12 +1,19 @@
 package org.elevenfiftyconsulting.controllers;
+//
 
+//import static com.users.security.Role.ROLE_USER;
+
+import java.util.Date;
+
+import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 
 import org.elevenfiftyconsulting.beans.ShoppingList;
 import org.elevenfiftyconsulting.beans.ShoppingListItem;
+import org.elevenfiftyconsulting.beans.User;
 //import org.elevenfiftyconsulting.repositories.NoteRepository;
-import org.elevenfiftyconsulting.repositories.ShoppingListItemRepository;
 import org.elevenfiftyconsulting.repositories.ShoppingListRepository;
+import org.elevenfiftyconsulting.repositories.UserRepository;
 //import org.elevenfiftyconsulting.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,83 +25,92 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+//import com.users.beans.User;
+//import com.users.beans.UserRole;
+
 @Controller
 public class ShoppingListController {
 
-//	@Autowired
-//	private NoteRepository noteRepo;
-
-	@Autowired
-	private ShoppingListItemRepository shoppingListItemRepo;
+	// @Autowired
+	// private NoteRepository noteRepo;
 
 	@Autowired
 	private ShoppingListRepository shoppingListRepo;
 
-//	@Autowired
-//	private UserRepository userRepo;
+	private static UserRepository userRepo;
+
+	@Autowired
+	private UserRepository userrRepo;
+
+	@PostConstruct
+	public void initStaticUserRepo() {
+		userRepo = this.userrRepo;
+	}
 
 	@RequestMapping("/")
 	public String index(Model model) {
-		return "redirect:/shoppinglists";
+		return "index";
 	}
-	
+
 	@RequestMapping("/home")
 	public String home(Model model) {
 		return "index";
 	}
-	
+
 	@RequestMapping("/shoppinglists")
 	public String shoppingLists(Model model) {
-		return "shoppingListItem/shoppingList";
+		User currentUser = ShoppingListController.getCurrentUser();
+		model.addAttribute("shoppingLists", shoppingListRepo.findAllByUser(currentUser));
+		return "shoppingList/shoppingList";
 	}
-	
+
 	@GetMapping("/shoppinglist/create")
 	public String shoppingListCreate(Model model) {
-		model.addAttribute(new ShoppingList());
-		return "shoppingListItem/shoppingListCreate";
+		model.addAttribute("shoppingList", new ShoppingList());
+		return "shoppingList/shoppingListCreate";
 	}
-	
+
 	@PostMapping("/shoppinglist/create")
-	public String shoppingListCreate(@ModelAttribute @Valid ShoppingList shoppingList, Model model) {
-
-//		if (result.hasErrors()) {
-//			model.addAttribute("shoppingList", shoppingList);
-//			return "shoppingListItem/shoppingListCreate";
-//		} else {
-//			shoppingListRepo.save(shoppingList);
-//			return "redirect:/shoppinglists";
-//		}
-		
-		shoppingListRepo.save(shoppingList);
-		return "redirect:/shoppinglists/";
-
-	}
-
-	@RequestMapping("shoppinglist/{shoppingListId}")
-	public String listShoppingListItems(@PathVariable(name="shoppingListId") int shoppingListId, Model model) {
-		model.addAttribute("shoppingListItems", shoppingListRepo.findOne(shoppingListId));
-		return "shoppingListItems";
-	}
-	
-	//create view shoppingListItem
-	@GetMapping("/shoppinglistitem/create")
-	public String shoppingListItemCreate(Model model) {
-		model.addAttribute(new ShoppingListItem());
-		return "shoppingListItem/shoppingListItemCreate";
-	}
-	
-	//save created shoppingListItem
-	@PostMapping("/shoppinglistitem/create")
-	public String shoppingListItemCreate(@ModelAttribute @Valid ShoppingListItem shoppingListItem, BindingResult result, Model model) {
-
+	public String shoppingListCreate(@ModelAttribute ShoppingList shoppingList, BindingResult result, Model model) {
+		User currentUser = ShoppingListController.getCurrentUser();
 		if (result.hasErrors()) {
-			model.addAttribute("shoppingListItem", shoppingListItem);
-			return "shoppingListItem/shoppingListItemCreate";
+			model.addAttribute("shoppingList", shoppingList);
+			return "shoppingListItem/shoppingListCreate";
 		} else {
-			shoppingListItemRepo.save(shoppingListItem);
-			return "redirect:/shoppingListItems";
+			shoppingList.setUser(currentUser);
+			shoppingList.setCreatedUtc(new Date(System.currentTimeMillis()));
+			shoppingList.setModifiedUtc(new Date(System.currentTimeMillis()));
+			shoppingListRepo.save(shoppingList);
+			return "redirect:/shoppinglists";
 		}
+	}
 
+	@GetMapping("/shoppinglist/{id}/delete")
+	public String shoppingListDelete(Model model, @PathVariable(name = "id") long id) {
+
+		model.addAttribute("id", id);
+		ShoppingList i = shoppingListRepo.findOne(id);
+		model.addAttribute("shoppingList", i);
+		model.addAttribute("shoppingList", shoppingListRepo.findOne(id));
+		return "shoppinglist/shoppingListDelete";
+	}
+
+	@PostMapping("/shoppinglist/{id}/delete")
+	public String shoppingListDeleteSave(@PathVariable(name = "id") long id,
+			@ModelAttribute @Valid ShoppingList shoppingList, BindingResult result, Model model) {
+		
+		ShoppingList i = shoppingListRepo.findOne(id);
+
+		shoppingListRepo.delete(i);
+		return "redirect:/shoppinglists";
+
+	}
+
+	public static User getCurrentUser() {
+		User currentUser = new User();
+		String email = currentUser.getUserEmail();
+		currentUser = userRepo.findOneByEmail(email);
+		return currentUser;
 	}
 
 }

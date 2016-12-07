@@ -1,27 +1,30 @@
 package org.elevenfiftyconsulting.beans;
 
-import java.time.OffsetDateTime;
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+//import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+//import javax.persistence.OneToOne;
 //import javax.persistence.GenerationType;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "shopping_list")
+@Table(name = "shopping_lists")
 public class ShoppingList {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private long id;
 
-	@OneToOne(optional = false)
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "user_id")
 	private User user;
 
@@ -29,26 +32,33 @@ public class ShoppingList {
 
 	private String name;
 
-	private OffsetDateTime createdUtc;
-	private OffsetDateTime modifiedUtc;
+	private Date createdUtc;
+	private Date modifiedUtc;
 
-	@OneToMany(mappedBy = "shoppingList")
+	@OneToMany(mappedBy = "shoppingList", cascade = CascadeType.ALL)
 	private List<ShoppingListItem> shoppingListItems;
+	
+	
 
-	public ShoppingList() {
+//	public ShoppingList() {
+//		this.name = name;
+//		this.createdUtc = createdUtc;
+//		this.modifiedUtc = modifiedUtc;
+//	}
+
+	public List<ShoppingListItem> getShoppingListItems() {
+		return shoppingListItems;
 	}
 
-	public ShoppingList(String name, OffsetDateTime createdUtc, OffsetDateTime modifiedUtc) {
-		this.name = name;
-		this.createdUtc = createdUtc;
-		this.modifiedUtc = modifiedUtc;
+	public void setShoppingListItems(List<ShoppingListItem> shoppingListItems) {
+		this.shoppingListItems = shoppingListItems;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -76,20 +86,42 @@ public class ShoppingList {
 		this.name = name;
 	}
 
-	public OffsetDateTime getCreatedUtc() {
+	public Date getCreatedUtc() {
 		return createdUtc;
 	}
 
-	public void setCreatedUtc(OffsetDateTime createdUtc) {
+	public void setCreatedUtc(Date createdUtc) {
 		this.createdUtc = createdUtc;
 	}
 
-	public OffsetDateTime getModifiedUtc() {
+	public Date getModifiedUtc() {
 		return modifiedUtc;
 	}
 
-	public void setModifiedUtc(OffsetDateTime modifiedUtc) {
+	public void setModifiedUtc(Date modifiedUtc) {
 		this.modifiedUtc = modifiedUtc;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ShoppingList other = (ShoppingList) obj;
+		if (id != other.id)
+			return false;
+		return true;
 	}
 
 }
