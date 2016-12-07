@@ -1,15 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layouts/basic">
 <head>
 <title>The Branches Small Groups</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="stylesheet" type="text/css"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="/../../css/main.css"
-	th:href="@{/../../css/main.css}" />
+
+
 </head>
-<body id="login-body">
+<body layout:fragment="content">
 	<div class="field" id="login-panel">
 		<h1>Welcome</h1>
 		<div th:if="${param.error}">Invalid username and password.</div>
@@ -24,7 +21,7 @@
 				<input class="login-input" type="password" name="password" />
 			</div>
 			<div>
-				<input class="btn btn-custom" type="submit" value="Sign In" />
+				<input class="btn btn-success" type="submit" value="Sign In" />
 			</div>
 		</form>
 		<a th:href="@{|/register|}">Register</a>

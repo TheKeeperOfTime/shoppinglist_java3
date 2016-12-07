@@ -84,7 +84,7 @@ public class ShoppingListController {
 			return "redirect:/shoppinglists";
 		}
 	}
-	
+
 	@GetMapping("/shoppinglist/{id}/delete")
 	public String shoppingListDelete(Model model, @PathVariable(name = "id") long id) {
 
@@ -94,16 +94,16 @@ public class ShoppingListController {
 		model.addAttribute("shoppingList", shoppingListRepo.findOne(id));
 		return "shoppinglist/shoppingListDelete";
 	}
-	
-	@PostMapping("/shoppinglist/{id}/delete")
-	public String shoppingListDeleteSave(@PathVariable(name = "id") long id, @ModelAttribute @Valid ShoppingList shoppingList,
 
-			BindingResult result, Model model) {
-			ShoppingList i = shoppingListRepo.findOne(id);
-			
-			shoppingListRepo.delete(i);
-			return "redirect:/shoppinglists";
+	@PostMapping("/shoppinglist/{id}/delete")
+	public String shoppingListDeleteSave(@PathVariable(name = "id") long id,
+			@ModelAttribute @Valid ShoppingList shoppingList, BindingResult result, Model model) {
 		
+		ShoppingList i = shoppingListRepo.findOne(id);
+
+		shoppingListRepo.delete(i);
+		return "redirect:/shoppinglists";
+
 	}
 
 	public static User getCurrentUser() {
