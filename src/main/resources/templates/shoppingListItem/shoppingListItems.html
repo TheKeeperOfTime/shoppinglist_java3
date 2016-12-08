@@ -45,8 +45,8 @@
 				<!-- <td><input type="hidden" name="_isChecked"
 					th:value="${i.isChecked}" /></td> -->
 					
-				<!-- <td><input type="checkbox" name="isChecked"
-					th:checked="${i.isChecked}" /></td> -->
+				<!-- <td><input type='checkbox' name="isChecked"
+					data-bind="checked: isChecked" th:checked="${i.isChecked}" /></td> -->
 
 					
 				<td th:text="${i.contents}"></td>
@@ -59,16 +59,13 @@
 			</tr>
 		</tbody>
 	</table>
+	
+	<a class="btn btn-warning" th:href="@{|/shoppinglist/${shoppingList.id}/clearchecked|}">Clear All Checked</a>
 
-	<!-- <script>
-		document.getElementById("check1").onchange = function(e) {
-			var checked = e.target.checked;
-			if (checked) {
-				alert("Checked");
-			} else {
-				alert("Unchecked");
-			}
-		}
+	<!-- <script type="text/javascript">
+		var viewModel = {
+				isChecked : ko.observable(false),
+		};
 	</script> -->
 </body>
 </html>

@@ -1,16 +1,17 @@
 package org.elevenfiftyconsulting.controllers;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 
+import org.elevenfiftyconsulting.beans.ShoppingList;
 import org.elevenfiftyconsulting.beans.ShoppingListItem;
 import org.elevenfiftyconsulting.beans.User;
 import org.elevenfiftyconsulting.repositories.ShoppingListItemRepository;
 import org.elevenfiftyconsulting.repositories.ShoppingListRepository;
 import org.elevenfiftyconsulting.repositories.UserRepository;
-import org.elevenfiftyconsulting.security.Priority;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -78,6 +79,22 @@ public class ShoppingListItemController {
 		shoppingListItemRepo.save(i);
 		model.addAttribute("shoppingList", shoppingListRepo.findOne(id));
 		model.addAttribute("shoppingListItems", shoppingListRepo.findOne(id).getShoppingListItems());
+		return "redirect:/shoppinglist/{id}";
+	}
+	
+	@GetMapping("/shoppinglist/{id}/clearchecked")
+	public String shoppingListClearChecked(Model model, @PathVariable(name = "id") long id){
+		ShoppingList l = shoppingListRepo.findOne(id);
+		List<ShoppingListItem> li = l.getShoppingListItems();
+		
+		for(ShoppingListItem i : li){
+			i.setChecked(false);
+			shoppingListItemRepo.save(i);
+		}
+		shoppingListRepo.save(l);
+		model.addAttribute("shoppingListItem", li);
+		model.addAttribute("shoppingList", shoppingListRepo.findOne(id));
+		
 		return "redirect:/shoppinglist/{id}";
 	}
 	
