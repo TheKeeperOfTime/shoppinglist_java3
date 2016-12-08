@@ -18,9 +18,6 @@
 				<a class="btn btn-custom-two" href="/shoppinglistitem/create"
 					th:href="@{|/shoppinglist/${shoppingList.id}/create|}"
 					role="button">Create New Item</a>
-					<a class="btn btn-custom-two"
-					href="/" th:href="@{|/shoppinglist/${shoppingList.id}/deletechecked|}"
-					role="button">Delete All</a>
 			</div>
 		</div>
 	</div>
@@ -45,11 +42,11 @@
 
 				<!-- <td><input type="hidden" name="_isChecked"
 					th:value="${i.isChecked}" /></td> -->
-					
+
 				<!-- <td><input type='checkbox' name="isChecked"
 					data-bind="checked: isChecked" th:checked="${i.isChecked}" /></td> -->
 
-					
+
 				<td th:text="${i.contents}"></td>
 				<td th:if="${i.priority} == 1">Grab it now!</td>
 				<td th:if="${i.priority} == 2">Need it soon</td>
@@ -60,8 +57,13 @@
 			</tr>
 		</tbody>
 	</table>
-	
-	<a class="btn btn-custom-two" th:href="@{|/shoppinglist/${shoppingList.id}/clearchecked|}">Clear All Checked</a>
+
+	<a class="btn btn-custom-two"
+		th:href="@{|/shoppinglist/${shoppingList.id}/clearchecked|}">Clear
+		All Checked</a>
+	<a class="btn btn-custom-two" href="/"
+		th:href="@{|/shoppinglist/${shoppingList.id}/deletechecked|}"
+		role="button">Delete All Checked</a>
 
 	<!-- <script type="text/javascript">
 		var viewModel = {
