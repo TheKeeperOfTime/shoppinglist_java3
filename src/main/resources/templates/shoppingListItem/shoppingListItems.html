@@ -17,8 +17,9 @@
 			<div class="pull-right" style="padding-top: 24px">
 				<a class="btn btn-success" href="/shoppinglistitem/create"
 					th:href="@{|/shoppinglist/${shoppingList.id}/create|}"
-					role="button">Create New Item</a> <a class="btn btn-danger"
-					href="/" th:href="@{|/shoppinglist/${shoppingList.id}/delete|}"
+					role="button">Create New Item</a>
+					<a class="btn btn-danger"
+					href="/" th:href="@{|/shoppinglist/${shoppingList.id}/deletechecked|}"
 					role="button">Delete All</a>
 			</div>
 		</div>
