@@ -11,11 +11,11 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="pull-left">
-			<h1>Shopping Lists</h1>
+				<h1>Shopping Lists</h1>
 			</div>
-			
+
 			<div class="pull-right" style="padding-top: 24px">
-				<a class="btn btn-success" href="/"
+				<a class="btn btn-custom-two" href="/"
 					th:href="@{|/shoppinglist/create|}" role="button">Create New
 					List</a>
 			</div>
@@ -44,9 +44,9 @@
 			<tr th:each="shoppinglist : ${shoppingLists}">
 				<td th:style="'color:' + ${shoppinglist.color} + ';'"
 					th:text="${shoppinglist.name}"></td>
-				<td><a class="btn btn-info" href="/"
+				<td><a class="btn btn-custom pull-right" href="/"
 					th:href="@{|/shoppinglist/${shoppinglist.id}|}">View</a></td>
-				<td><a class="btn btn-danger" href="/"
+				<td><a class="btn btn-custom pull-left" href="/"
 					th:href="@{|/shoppinglist/${shoppinglist.id}/delete|}"
 					role="button">Delete</a></td>
 			</tr>
