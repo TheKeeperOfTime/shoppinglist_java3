@@ -10,21 +10,19 @@
 	<h1>Shopping List Delete All Items</h1>
 	
 	
-	
-	
-	<form method="POST" th:object="${shoppingList}">
-		<input type="hidden" name="id" th:value="${id}" />
-		
-		<dl class="dl-horizontal" th:if="${shoppingList}">
-			<dt>Name</dt>
-			<dd th:text="${shoppingList.name}"></dd>
-		
-		
-		</dl>
-		
-		
-		
-		<button type="submit" class="btn btn-default">delete all items</button>
+	<form method="POST" th:object="${list}">
+			
+			
+	<div th:each="i : ${shoppingListItems}">
+		<div th:if="${i.isChecked} == true">
+			<div>
+				<h4>Name</h4>
+				<p th:text="${i.contents}"></p>
+			</div>
+		</div>
+	</div>
+	<button type="submit" class="btn btn-danger">Delete</button>
+		</form>
 		
 		<!-- <div class="field">
 			<label for="contents">Content</label> <input name="contents" type="text"
@@ -32,6 +30,5 @@
 		</div>
 
 		<button type="submit" class="btn btn-default">delete all</button>-->
-	</form>
 </body>
 </html>
