@@ -15,11 +15,9 @@
 				<h1>Items</h1>
 			</div>
 			<div class="pull-right" style="padding-top: 24px">
-				<a class="btn btn-success" href="/shoppinglistitem/create"
+				<a class="btn btn-custom-two" href="/shoppinglistitem/create"
 					th:href="@{|/shoppinglist/${shoppingList.id}/create|}"
-					role="button">Create New Item</a> <a class="btn btn-danger"
-					href="/" th:href="@{|/shoppinglist/${shoppingList.id}/delete|}"
-					role="button">Delete All</a>
+					role="button">Create New Item</a>
 			</div>
 		</div>
 	</div>
@@ -44,31 +42,33 @@
 
 				<!-- <td><input type="hidden" name="_isChecked"
 					th:value="${i.isChecked}" /></td> -->
-					
-				<!-- <td><input type="checkbox" name="isChecked"
-					th:checked="${i.isChecked}" /></td> -->
 
-					
+				<!-- <td><input type='checkbox' name="isChecked"
+					data-bind="checked: isChecked" th:checked="${i.isChecked}" /></td> -->
+
+
 				<td th:text="${i.contents}"></td>
 				<td th:if="${i.priority} == 1">Grab it now!</td>
 				<td th:if="${i.priority} == 2">Need it soon</td>
 				<td th:if="${i.priority} == 3">It can wait</td>
-				<td><a class="btn btn-danger" href="/"
+				<td><a class="btn btn-custom" href="/"
 					th:href="@{|/shoppinglist/${shoppingList.id}/${i.id}/delete|}"
 					role="button">Delete</a></td>
 			</tr>
 		</tbody>
 	</table>
 
-	<!-- <script>
-		document.getElementById("check1").onchange = function(e) {
-			var checked = e.target.checked;
-			if (checked) {
-				alert("Checked");
-			} else {
-				alert("Unchecked");
-			}
-		}
+	<a class="btn btn-custom-two"
+		th:href="@{|/shoppinglist/${shoppingList.id}/clearchecked|}">Clear
+		All Checked</a>
+	<a class="btn btn-custom-two" href="/"
+		th:href="@{|/shoppinglist/${shoppingList.id}/deletechecked|}"
+		role="button">Delete All Checked</a>
+
+	<!-- <script type="text/javascript">
+		var viewModel = {
+				isChecked : ko.observable(false),
+		};
 	</script> -->
 </body>
 </html>
