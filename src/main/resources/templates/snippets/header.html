@@ -8,14 +8,14 @@
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Shopping List</a>
+				<a class="navbar-brand" id="brand-logo" href="#">EFA Shopping List</a>
 			</div>
 			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
+				<ul class="nav navbar-nav nav-item" id="nav-item">
 					<li><a href="#" th:href="@{/shoppinglists}">Shopping Lists</a></li>
 				</ul>
 				
-				<ul class="nav navbar-nav navbar-right" sec:authorize="isAuthenticated()">
+				<ul class="nav navbar-nav navbar-right" sec:authorize="isAuthenticated()" id="nav-logout">
 					<li><a href="#" onclick="$('#logoutForm').submit();">Logout</a></li>
 				</ul>
 				<form th:action="@{/logout}" method="post" style="display: none;" id="logoutForm" sec:authorize="isAuthenticated()">
