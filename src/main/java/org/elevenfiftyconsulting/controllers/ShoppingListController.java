@@ -92,7 +92,7 @@ public class ShoppingListController {
 		ShoppingList i = shoppingListRepo.findOne(id);
 		model.addAttribute("shoppingList", i);
 		model.addAttribute("shoppingList", shoppingListRepo.findOne(id));
-		return "shoppinglist/shoppingListDelete";
+		return "shoppingList/shoppingListDelete";
 	}
 
 	@PostMapping("/shoppinglist/{id}/delete")
