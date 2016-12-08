@@ -86,6 +86,7 @@ public class ShoppingListItemController {
 	@GetMapping("/shoppinglist/{id}/clearchecked")
 	public String shoppingListClearChecked(Model model, @PathVariable(name = "id") long id){
 		ShoppingList l = shoppingListRepo.findOne(id);
+
 		List<ShoppingListItem> li = l.getShoppingListItems();
 		
 		for(ShoppingListItem i : li){
@@ -95,7 +96,6 @@ public class ShoppingListItemController {
 		shoppingListRepo.save(l);
 		model.addAttribute("shoppingListItem", li);
 		model.addAttribute("shoppingList", shoppingListRepo.findOne(id));
-		
 		return "redirect:/shoppinglist/{id}";
 	}
 	
