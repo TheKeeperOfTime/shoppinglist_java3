@@ -49,7 +49,7 @@ public class ShoppingListController {
 
 	@RequestMapping("/")
 	public String index(Model model) {
-		return "redirect/shoppinglists";
+		return "redirect:/shoppinglists";
 	}
 
 	@RequestMapping("/home")
